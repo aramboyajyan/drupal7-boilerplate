@@ -18,9 +18,9 @@ The module and all example code is built completely using Drupal best practices 
 ### Todo
 
 - Documentation
-- Renaming link titles (secondary tabs) - hook_menu_alter()
+- Renaming link titles (secondary tabs) - `hook_menu_alter()`
 - Ajax calls using ctools
-- Admin textarea field with WYSIWYG
+- Admin textarea field with input format
 - Add all sample form types in admin settings page
 - Ajax forms
 - Custom CCK fields
