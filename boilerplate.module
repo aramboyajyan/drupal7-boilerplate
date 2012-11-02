@@ -1,0 +1,466 @@
+<?php
+
+/**
+ * @file
+ * Custom drupal boilerplate module.
+ *
+ * Created by: Topsitemakers
+ * http://www.topsitemakers.com/
+ */
+
+/**
+ * Implements hook_help().
+ */
+function boilerplate_help($path, $arg) {
+  switch ($path) {
+
+    // This is displayed in the main admin help page
+    case 'admin/help#boilerplate':
+      $output  = '<h2>' . t('Sample help page') . '</h2>';
+      $output .= '<p>' . t('This page should contain instructions about the module usage and configuration options.') . '</p>';
+      $output .= '<p>' . t('If the module integrates with other modules, they should be listed here together with some basic explanation on how to do so.') . '</p>';
+      $output .= '<p>' . t('<a href="@link">On this page</a> you can see custom help added to a system path.', array('@link' => url('admin/structure/types'))) . '</p>';
+      // Leave an empty paragraph to space out the permissions box
+      $output .= '<p>&nbsp;</p>';
+      return $output;
+
+    // This is displayed on a custom path (content types)
+    case 'admin/structure/types':
+      $output  = '<h2>' . t('Sample help - view content types') . '</h2>';
+      $output .= '<p>' . t('On this page you can see available content types and create new ones if necessary.') . '</p>';
+      return $output;
+
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function boilerplate_menu() {
+  $items['boilerplate'] = array(
+    'page callback' => 'boilerplate_sample_page_callback',
+    'page arguments' => array(),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'boilerplate.pages.inc',
+  );
+  $items['boilerplate/form'] = array(
+    'title' => 'Sample form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('boilerplate_sample_form'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_CALLBACK,
+    'file' => 'boilerplate.forms.inc',
+  );
+  $items['boilerplate/arguments/%/%'] = array(
+    'page callback' => 'boilerplate_sample_page_callback',
+    'page arguments' => array(2, 3),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'boilerplate.pages.inc',
+  );
+  $items['admin/config/development/boilerplate'] = array(
+    'title' => 'Sample settings page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('boilerplate_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_CALLBACK,
+    'file' => 'boilerplate.admin.inc',
+  );
+  $items['admin/config/development/boilerplate/batch'] = array(
+    'title' => 'Sample batch process',
+    'page callback' => 'boilerplate_batch_init',
+    'access arguments' => array('administer content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'boilerplate.batch.inc',
+  );
+  $items['user/%user/boilerplate'] = array(
+    'title' => 'Sample local task',
+    'page callback' => 'boilerplate_local_task_user',
+    'page arguments' => array(1),
+    'access arguments' => array('administer content'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'boilerplate.pages.inc',
+    'weight' => 100,
+  );
+  $items['node/%node/boilerplate'] = array(
+    'title' => 'Sample local task',
+    'page callback' => 'boilerplate_local_task_node',
+    'page arguments' => array(1),
+    'access arguments' => array('administer content'),
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+    'file' => 'boilerplate.pages.inc',
+    'weight' => 100,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_admin_paths().
+ */
+function boilerplate_admin_paths() {
+  return array(
+    'arguments/*' => TRUE,
+  );
+}
+
+/**
+ * Implements hook_permission().
+ */
+function boilerplate_permission() {
+  return array(
+    'sample permission' => array(
+      'title' => 'Sample permission rule',
+    ),
+  );
+}
+
+/**
+ * Implements hook_cron().
+ */
+function boilerplate_cron() {
+  
+  // 
+
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function boilerplate_block_info() {
+  $blocks['sample']['info']  = t('Sample block');
+  $blocks['sample']['properties']['administrative'] = TRUE;
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function boilerplate_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'sample':
+      $block['subject'] = NULL;
+      $block['content'] = '<p>Sample block content</p>';
+      if (user_access('sample permission')) {
+        $block['content'] .= '<p>This text is visible only to certain roles.</p>';
+      }
+      return $block;
+  }
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function boilerplate_block_configure($delta = '') {
+  $form = array();
+  switch ($delta) {
+    case 'sample':
+      $form['boilerplate_block_count'] = array(
+        '#type' => 'select',
+        '#title' => t('Sample counting'),
+        '#default_value' => variable_get('boilerplate_block_count', 10),
+        '#options' => drupal_map_assoc(array(2, 3, 4, 5, 6, 7, 8, 9, 10, )),
+      );
+      return $form;
+  }
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function boilerplate_block_save($delta = '', $edit = array()) {
+  switch ($delta) {
+    case 'sample':
+      variable_set('boilerplate_block_count', $edit['boilerplate_block_count']);
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function boilerplate_preprocess_page(&$vars) {
+
+  global $user;
+
+  // 
+
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function boilerplate_preprocess_node(&$vars) {
+
+  global $user;
+
+  /**
+   * Per content type preprocessing
+   */
+  switch ($vars['node']->type) {
+    
+    // Pages
+    case 'page':
+      break;
+
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function boilerplate_preprocess_field(&$vars) {
+
+  global $user;
+
+  /**
+   * Per field preprocessing
+   */
+  switch ($vars['element']['#field_name']) {
+
+    // Sample field
+    case 'field_sample_field':
+      $vars['items'][0]['#markup'] = 'Overridden value.';
+      break;
+
+  }
+
+  /**
+   * Per content type preprocessing
+   */
+  if ($vars['element']['#entity_type'] == 'node') {
+    switch ($element['#object']->type) {
+
+      // Pages
+      case 'page':
+        if ($vars['element']['#field_name'] == 'field_sample_field']) {
+          $vars['items'][0]['#markup'] = 'Overridden based on content type.';
+        }
+        break;
+
+    }
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function boilerplate_preprocess_block(&$vars) {
+
+  global $user;
+
+  // 
+
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function boilerplate_form_alter(&$form, &$form_state, $form_id) {
+
+  /**
+   * General overrides
+   */
+  switch ($form['#id']) {
+
+    // Node comment form
+    case 'comment-form':
+      // Remove the "Your name" field; unnecessary if working with Starter theme.
+      unset($form['author']['_author']);
+      break;
+
+    // User login form
+    case 'user-login':
+      // Remove default descriptions
+      unset($form['name']['#description']);
+      unset($form['pass']['#description']);
+      break;
+
+    // User registration form
+    case 'user-register-form':
+      break;
+
+    // Site contact form
+    case 'contact-site-form':
+      break;
+
+  }
+
+  /**
+   * Specific overrides
+   */
+  switch ($form_id) {
+
+    // Example override for node comment form
+    case 'comment_node_type_form':
+      break;
+
+    // Panels edit form
+    case 'panels_edit_display_form':
+      // Remove "Live preview"
+      $form['preview']['#access'] = FALSE;
+      break;
+
+    // Sample webform custom validation
+    case 'webform_client_form_1':
+      $form['#validate'][] = '_boilerplate_validate_webform';
+      $first = array_shift($form['#submit']);
+      array_unshift($form['#submit'], $first, '_boilerplate_validate_webform');
+      break;
+      
+  }
+
+}
+
+/**
+ * Implements hook_theme().
+ */
+function boilerplate_theme($existing, $type, $theme, $path) {
+  // Get the path to this module and define theme dir
+  $module_path = drupal_get_path('module', 'boilerplate');
+  $theme_dir   = $module_path . '/theme';
+  // Themable elements
+  return array(
+    'sample-template' => array(
+      'template' => 'sample-template',
+      'variables' => array('content' => NULL),
+      'path' => $theme_dir,
+    ),
+  );
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function boilerplate_page_alter(&$page) {
+
+  // Add custom setting accessible in JS through Drupal.settings.boilerplate.sampleVar
+  drupal_add_js(array('boilerplate' => array('sampleVar' => 'Custom value')), array('type' => 'setting'));
+
+  // Add content to the end of the page
+  $page['page_bottom']['boilerplate'] = array(
+    '#type' => 'markup',
+    '#markup' => '<!-- This content will be added to the end of the page. -->',
+  );
+
+}
+
+/**
+ * Implements hook_mail().
+ */
+function boilerplate_mail($key, &$message, $params) {
+  $language = $message['language'];
+  $variables = array(
+    '!site-name' => variable_get('site_name', 'Drupal'),
+    '!subject' => $params['subject'],
+  );
+  switch ($key) {
+    case 'sample_mail':
+      $message['subject'] .= t('!subject', $variables, array('langcode' => $language->language));
+      $message['body'][] = t('Just a sample email sent from !site-name to demonstrate the hook_mail() function.', $variables, array('langcode' => $language->language));
+      $message['body'][] = $params['message'];
+      break;
+  }
+}
+
+/**
+ * Implements of hook_user_view().
+ *
+ * Adds a custom element to the user view page.
+ */
+function boilerplate_user_view($account, $view_mode, $langcode) {
+  $account->content['boilerplate'] = array(
+    '#type' => 'user_profile_item',
+    '#title' => t('Boilerplate'),
+    '#markup' => t('Your account ID is: @id', array('@id' => $account->uid)),
+  );
+}
+
+/**
+ * Implements hook_webform_select_options_info().
+ * 
+ * Defines a custom dropdown form element to be used with the Webform module.
+ */
+function boilerplate_webform_select_options_info() {
+  $items['nodes'] = array(
+    'title' => t('List of published nodes'),
+    'options callback' => '_boilerplate_get_nodes',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_skinr_api_VERSION().
+ */
+function boilerplate_skinr_api_2() {
+  return array(
+    'directory' => 'skins',
+  );
+}
+
+/**
+ * Sample function - send an email.
+ */
+function boilerplate_sample_send_email() {
+  global $user;
+  $values['sender'] = $user;
+  drupal_mail('boilerplate', 'sample_mail', 'email@to.com', language_default(), $values, 'email@from.com');
+  flood_register_event('boilerplate', 3600);
+  watchdog('mail', '%sender-name (@sender-from) sent an e-mail regarding %category.', array('%sender-name' => $values['name'], '@sender-from' => $from, '%category' => $values['category']['category']));
+}
+
+/**
+ * Sample function - caching usage.
+ */
+function boilerplate_sample_cached_data($reset = FALSE) {
+  
+  // Save data in a static variable for consecutive calls
+  static $data;
+  
+  // If data is not set or reset is requested, regenerate
+  if (!isset($data) || $reset) {
+    if (!$reset && ($cache = cache_get('boilerplate_sample_data')) && !empty($cache->data)) {
+      $data = unserialize($cache->data);
+    }
+    else {
+      // Regenerate the data
+      $data = array(1, 2, 3);
+      // Save the data in cache; if it's an array serialize it
+      // Last parameter is expiration; CACHE_PERMANENT, CACHE_TEMPORARY or timestamp
+      cache_set('boilerplate_sample_data', serialize($data), 'cache', REQUEST_TIME + 1*24*60*60);
+    }
+  }
+  return $data;
+  
+}
+
+/**
+ * Sample function - get the list of published nodes on the site.
+ *
+ * Used for sample webform element.
+ */
+function _boilerplate_get_nodes() {
+  $nodes = array();
+  $nodes_query = db_query("SELECT `nid`, `title` FROM {node} WHERE `status` = 1 ORDER BY `title`");
+  foreach ($nodes_query as $node) {
+    $nodes[$node->nid] = $node->title;
+  }
+  return $nodes;
+}
+
+/**
+ * Sample function - custom validation function for webform component.
+ */
+function _boilerplate_validate_webform($form) {
+  foreach ($form['#node']->webform['components'] as $element_id => $element) {
+    if ($element['form_key'] == 'sample_field') {
+      if ($element['value'] != 'Sample value') {
+        form_set_error('', t('Validation message.'));
+      }
+    }
+  }
+}

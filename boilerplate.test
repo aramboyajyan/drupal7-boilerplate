@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file 
+ * Tests for boilerplate.module.
+ *
+ * Created by: Topsitemakers
+ * http://www.topsitemakers.com/
+ */
+
+/**
+ * Parent class for module testing
+ * All other test cases should inherit this case for better structure.
+ */
+class BoilerplateWebTestCase extends DrupalWebTestCase {
+
+  protected $admin_user;
+  protected $web_user;
+  protected $node;
+
+  /**
+   * Set up the test case and enable all necessary modules for testing.
+   */
+  function setUp() {
+    parent::setUp('boilerplate');
+  }
+
+}
+
+/**
+ * Example test case
+ */
+class BoilerplateSampleTestCase extends BoilerplateWebTestCase {
+
+  /**
+   * Basic information for this test case
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Sample test case',
+      'description' => 'Sample test case for Boilerplate module.',
+      'group' => 'Boilerplate',
+    );
+  }
+
+  /**
+   * Sample test function
+   */
+  function testSample() {
+    // 
+  }
+
+}

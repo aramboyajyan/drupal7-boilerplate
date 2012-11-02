@@ -1,0 +1,83 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update functions.
+ *
+ * Created by: Topsitemakers
+ * http://www.topsitemakers.com/
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function boilerplate_schema() {
+  $schema['boilerplate'] = array(
+    'description' => 'Table description.',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary key.',
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Sample varchar field.',
+        'translatable' => TRUE,
+      ),
+      'body' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big',
+        'description' => 'Sample text field.',
+      ),
+      'weight' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Sample integer field.',
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'category' => array('title'),
+    ),
+    'indexes' => array(
+      'list' => array('weight', 'title'),
+    ),
+  );
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function boilerplate_install() {
+
+  /*
+  // Update the system weight and place it after a certain module
+  $weight = db_select('system', 's')
+              ->fields('s', array('weight'))
+              ->condition('name', 'node', '=')
+              ->execute()
+              ->fetchField();
+
+  db_update('system')
+    ->fields(array('weight' => $weight + 1))
+    ->condition('name', 'boilerplate', '=')
+    ->execute();
+  */
+  
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function boilerplate_uninstall() {
+  // Remove all our variables at once
+  db_query("DELETE FROM {variable} WHERE `name` LIKE :variables", array(':variables' => 'boilerplate_%'));
+}
