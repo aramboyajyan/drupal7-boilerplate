@@ -26,6 +26,7 @@ stylesheets[all][] = css/boilerplate.css
 ; Module files
 ; ------------------------------------------------------------------------------
 files[] = boilerplate.module
+files[] = boilerplate.helpers.inc
 files[] = boilerplate.test
 
 ; ------------------------------------------------------------------------------
