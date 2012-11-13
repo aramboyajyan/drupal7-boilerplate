@@ -64,7 +64,6 @@ function boilerplate_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('boilerplate_admin_settings'),
     'access arguments' => array('administer site configuration'),
-    'type' => MENU_CALLBACK,
     'file' => 'boilerplate.admin.inc',
   );
   $items['admin/config/development/boilerplate/batch'] = array(
