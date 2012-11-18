@@ -8,6 +8,10 @@ Initial release.
 
 Adding a separate file for helper functions.
 
+### November 18, 2012
+
+Removing the Panels preview form.
+
 <hr>
 
 By: [topsitemakers.com](http://www.topsitemakers.com).

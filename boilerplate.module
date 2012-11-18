@@ -294,6 +294,12 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
    */
   switch ($form_id) {
 
+    // Panels edit form
+    case 'panels_edit_display_form':
+      // Remove "Live preview"
+      $form['preview']['#access'] = false;
+      break;
+
     // Example override for node comment form
     case 'comment_node_type_form':
       break;
