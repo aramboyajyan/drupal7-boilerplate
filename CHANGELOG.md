@@ -12,6 +12,10 @@ Adding a separate file for helper functions.
 
 Removing the Panels preview form.
 
+### November 20, 2012
+
+Removing the helper functions file.
+
 <hr>
 
 By: [topsitemakers.com](http://www.topsitemakers.com).
