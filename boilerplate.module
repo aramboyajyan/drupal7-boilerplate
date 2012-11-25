@@ -92,6 +92,7 @@ function boilerplate_menu() {
     'file' => 'boilerplate.pages.inc',
     'weight' => 100,
   );
+  
   return $items;
 }
 
@@ -130,6 +131,7 @@ function boilerplate_cron() {
 function boilerplate_block_info() {
   $blocks['sample']['info']  = t('Sample block');
   $blocks['sample']['properties']['administrative'] = TRUE;
+  
   return $blocks;
 }
 
@@ -395,6 +397,7 @@ function boilerplate_webform_select_options_info() {
     'title' => t('List of published nodes'),
     'options callback' => '_boilerplate_get_nodes',
   );
+  
   return $items;
 }
 
@@ -439,6 +442,7 @@ function boilerplate_sample_cached_data($reset = FALSE) {
       cache_set('boilerplate_sample_data', serialize($data), 'cache', REQUEST_TIME + 1*24*60*60);
     }
   }
+  
   return $data;
   
 }
@@ -454,6 +458,7 @@ function _boilerplate_get_nodes() {
   foreach ($nodes_query as $node) {
     $nodes[$node->nid] = $node->title;
   }
+  
   return $nodes;
 }
 
