@@ -32,8 +32,8 @@ function boilerplate_sample_form() {
  * Sample form validation
  */
 function boilerplate_sample_form_validate($form, &$form_state) {
-  if ($form_state['values']['sample_field'] == 'error') {
-    form_set_error('sampmle_field', t('Custom form validation.'));
+  if ($form_state['values']['sample_textfield'] == 'error') {
+    form_set_error('sample_textfield', t('Custom form validation.'));
   }
 }
 
