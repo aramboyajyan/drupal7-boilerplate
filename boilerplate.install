@@ -59,7 +59,7 @@ function boilerplate_schema() {
 function boilerplate_install() {
 
   /*
-  // Update the system weight and place it after a certain module
+  // Update the system weight and place it after a certain module.
   $weight = db_select('system', 's')
               ->fields('s', array('weight'))
               ->condition('name', 'node', '=')
@@ -78,6 +78,6 @@ function boilerplate_install() {
  * Implements hook_uninstall().
  */
 function boilerplate_uninstall() {
-  // Remove all our variables at once
+  // Remove all our variables at once.
   db_query("DELETE FROM {variable} WHERE `name` LIKE :variables", array(':variables' => 'boilerplate_%'));
 }

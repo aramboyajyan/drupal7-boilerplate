@@ -9,7 +9,8 @@
  */
 
 /**
- * Sample batch init function
+ * Sample batch init function.
+ *
  * Load and then resave all content on the site
  */
 function boilerplate_batch_init() {
@@ -35,8 +36,9 @@ function boilerplate_batch_init() {
 }
 
 /**
- * Batch worker function
- * This will be called for each batch item
+ * Batch worker function.
+ *
+ * This will be called for each batch item.
  */
 function boilerplate_batch_worker($nid, &$context) {
   $node = node_load($nid);
@@ -45,8 +47,9 @@ function boilerplate_batch_worker($nid, &$context) {
 }
 
 /**
- * Batch finish function
- * This will be called once all batch items are processed
+ * Batch finish function.
+ *
+ * This will be called once all batch items are processed.
  */
 function boilerplate_batch_finished($success, $results, $operations) {
   if ($success) {

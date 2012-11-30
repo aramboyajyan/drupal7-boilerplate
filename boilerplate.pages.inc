@@ -16,14 +16,14 @@ function boilerplate_sample_page_callback($argument1 = NULL, $argument2 = NULL) 
 }
 
 /**
- * Sample local tasks for user context
+ * Sample local tasks for user context.
  */
 function boilerplate_local_task_user($account) {
   return 'Viewing user: ' . $account->name;
 }
 
 /**
- * Sample local tasks for user context
+ * Sample local tasks for user context.
  */
 function boilerplate_local_task_node($node) {
   return 'Viewing node: ' . $node->title;

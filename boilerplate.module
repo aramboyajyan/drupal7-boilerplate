@@ -14,17 +14,17 @@
 function boilerplate_help($path, $arg) {
   switch ($path) {
 
-    // This is displayed in the main admin help page
+    // This is displayed in the main admin help page.
     case 'admin/help#boilerplate':
       $output  = '<h2>' . t('Sample help page') . '</h2>';
       $output .= '<p>' . t('This page should contain instructions about the module usage and configuration options.') . '</p>';
       $output .= '<p>' . t('If the module integrates with other modules, they should be listed here together with some basic explanation on how to do so.') . '</p>';
       $output .= '<p>' . t('<a href="@link">On this page</a> you can see custom help added to a system path.', array('@link' => url('admin/structure/types'))) . '</p>';
-      // Leave an empty paragraph to space out the permissions box
+      // Leave an empty paragraph to space out the permissions box.
       $output .= '<p>&nbsp;</p>';
       return $output;
 
-    // This is displayed on a custom path (content types)
+    // This is displayed on a custom path (content types).
     case 'admin/structure/types':
       $output  = '<h2>' . t('Sample help - view content types') . '</h2>';
       $output .= '<p>' . t('On this page you can see available content types and create new ones if necessary.') . '</p>';
@@ -198,7 +198,7 @@ function boilerplate_preprocess_node(&$vars) {
   global $user;
 
   /**
-   * Per content type preprocessing
+   * Per content type preprocessing.
    */
   switch ($vars['node']->type) {
     
@@ -218,7 +218,7 @@ function boilerplate_preprocess_field(&$vars) {
   global $user;
 
   /**
-   * Per field preprocessing
+   * Per field preprocessing.
    */
   switch ($vars['element']['#field_name']) {
 
@@ -264,55 +264,55 @@ function boilerplate_preprocess_block(&$vars) {
 function boilerplate_form_alter(&$form, &$form_state, $form_id) {
 
   /**
-   * General overrides
+   * General overrides.
    */
   switch ($form['#id']) {
 
-    // Node comment form
+    // Node comment form.
     case 'comment-form':
       // Remove the "Your name" field; unnecessary if working with Starter theme.
       unset($form['author']['_author']);
       break;
 
-    // User login form
+    // User login form.
     case 'user-login':
-      // Remove default descriptions
+      // Remove default descriptions.
       unset($form['name']['#description']);
       unset($form['pass']['#description']);
       break;
 
-    // User registration form
+    // User registration form.
     case 'user-register-form':
       break;
 
-    // Site contact form
+    // Site contact form.
     case 'contact-site-form':
       break;
 
   }
 
   /**
-   * Specific overrides
+   * Specific overrides.
    */
   switch ($form_id) {
 
-    // Panels edit form
+    // Panels edit form.
     case 'panels_edit_display_form':
       // Remove "Live preview"
       $form['preview']['#access'] = false;
       break;
 
-    // Example override for node comment form
+    // Example override for node comment form.
     case 'comment_node_type_form':
       break;
 
-    // Panels edit form
+    // Panels edit form.
     case 'panels_edit_display_form':
-      // Remove "Live preview"
+      // Remove "Live preview".
       $form['preview']['#access'] = FALSE;
       break;
 
-    // Sample webform custom validation
+    // Sample webform custom validation.
     case 'webform_client_form_1':
       $form['#validate'][] = '_boilerplate_validate_webform';
       $first = array_shift($form['#submit']);
@@ -327,10 +327,10 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
  * Implements hook_theme().
  */
 function boilerplate_theme($existing, $type, $theme, $path) {
-  // Get the path to this module and define theme dir
+  // Get the path to this module and define theme dir.
   $module_path = drupal_get_path('module', 'boilerplate');
   $theme_dir   = $module_path . '/theme';
-  // Themable elements
+  // Themable elements.
   return array(
     'sample-template' => array(
       'template' => 'sample-template',
@@ -345,10 +345,10 @@ function boilerplate_theme($existing, $type, $theme, $path) {
  */
 function boilerplate_page_alter(&$page) {
 
-  // Add custom setting accessible in JS through Drupal.settings.boilerplate.sampleVar
+  // Add custom setting accessible in JS through Drupal.settings.boilerplate.sampleVar.
   drupal_add_js(array('boilerplate' => array('sampleVar' => 'Custom value')), array('type' => 'setting'));
 
-  // Add content to the end of the page
+  // Add content to the end of the page.
   $page['page_bottom']['boilerplate'] = array(
     '#type' => 'markup',
     '#markup' => '<!-- This content will be added to the end of the page. -->',
@@ -429,16 +429,16 @@ function boilerplate_sample_cached_data($reset = FALSE) {
   // Save data in a static variable for consecutive calls
   static $data;
   
-  // If data is not set or reset is requested, regenerate
+  // If data is not set or reset is requested, regenerate.
   if (!isset($data) || $reset) {
     if (!$reset && ($cache = cache_get('boilerplate_sample_data')) && !empty($cache->data)) {
       $data = unserialize($cache->data);
     }
     else {
-      // Regenerate the data
+      // Regenerate the data.
       $data = array(1, 2, 3);
       // Save the data in cache; if it's an array serialize it
-      // Last parameter is expiration; CACHE_PERMANENT, CACHE_TEMPORARY or timestamp
+      // Last parameter is expiration; CACHE_PERMANENT, CACHE_TEMPORARY or timestamp.
       cache_set('boilerplate_sample_data', serialize($data), 'cache', REQUEST_TIME + 1*24*60*60);
     }
   }

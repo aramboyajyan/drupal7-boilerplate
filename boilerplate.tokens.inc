@@ -12,12 +12,12 @@
  * Implements hook_token_info().
  */
 function boilerplate_token_info() {
-  // Define our token type
+  // Define our token type.
   $types['boilerplate-test'] = array(
     'name' => t('Boilerplate'),
     'description' => t('Sample token created from a custom module.'),
   );
-  // Define specific tokens
+  // Define specific tokens.
   $tokens['time'] = array(
     'name' => t('Time'),
     'description' => t('Shows the current time.'),
@@ -40,7 +40,7 @@ function boilerplate_token_info() {
 function boilerplate_tokens($type, $tokens, array $data = array(), array $options = array()) {
   $replacements = array();
   switch ($type) {
-    // Our sample group
+    // Our sample group.
     case 'boilerplate-test':
       foreach ($tokens as $name => $original) {
         switch ($name) {

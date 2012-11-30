@@ -9,7 +9,8 @@
  */
 
 /**
- * Parent class for module testing
+ * Parent class for module testing.
+ *
  * All other test cases should inherit this case for better structure.
  */
 class BoilerplateWebTestCase extends DrupalWebTestCase {
@@ -28,12 +29,12 @@ class BoilerplateWebTestCase extends DrupalWebTestCase {
 }
 
 /**
- * Example test case
+ * Example test case.
  */
 class BoilerplateSampleTestCase extends BoilerplateWebTestCase {
 
   /**
-   * Basic information for this test case
+   * Basic information for this test case.
    */
   public static function getInfo() {
     return array(
@@ -44,7 +45,7 @@ class BoilerplateSampleTestCase extends BoilerplateWebTestCase {
   }
 
   /**
-   * Sample test function
+   * Sample test function.
    */
   function testSample() {
     // 

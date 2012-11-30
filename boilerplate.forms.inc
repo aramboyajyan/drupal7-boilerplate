@@ -9,7 +9,7 @@
  */
 
 /**
- * Sample form
+ * Sample form.
  */
 function boilerplate_sample_form() {
   $form['sample'] = array(
@@ -29,7 +29,7 @@ function boilerplate_sample_form() {
 }
 
 /**
- * Sample form validation
+ * Sample form validation.
  */
 function boilerplate_sample_form_validate($form, &$form_state) {
   if ($form_state['values']['sample_textfield'] == 'error') {
@@ -38,7 +38,7 @@ function boilerplate_sample_form_validate($form, &$form_state) {
 }
 
 /**
- * Sample form submit processing
+ * Sample form submit processing.
  */
 function boilerplate_sample_form_submit($form, &$form_state) {
   drupal_set_message(t('Form submitted successfully.'));
