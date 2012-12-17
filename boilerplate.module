@@ -237,7 +237,7 @@ function boilerplate_preprocess_field(&$vars) {
 
       // Pages
       case 'page':
-        if ($vars['element']['#field_name'] == 'field_sample_field']) {
+        if ($vars['element']['#field_name'] == 'field_sample_field') {
           $vars['items'][0]['#markup'] = 'Overridden based on content type.';
         }
         break;

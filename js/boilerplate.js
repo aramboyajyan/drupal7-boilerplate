@@ -10,7 +10,7 @@
   Drupal.behaviors.boilerplateModule = {
     attach: function (context, settings) {
 
-      // Sample action
+      // Sample action.
       /*
       $('#header', context).click(function () {
         console.log('Called from boilerplate.js');
