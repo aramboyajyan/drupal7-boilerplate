@@ -13,7 +13,7 @@
       // Sample action
       /*
       $('#header', context).click(function () {
-        alert('Called from boilerplate.js');
+        console.log('Called from boilerplate.js');
       });
       */
 
