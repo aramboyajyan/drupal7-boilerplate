@@ -285,6 +285,10 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
     case 'user-register-form':
       break;
 
+    // User reset password form.
+    case 'user_pass':
+      break;
+
     // Site contact form.
     case 'contact-site-form':
       break;
