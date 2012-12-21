@@ -184,8 +184,6 @@ function boilerplate_block_save($delta = '', $edit = array()) {
  */
 function boilerplate_preprocess_page(&$vars) {
 
-  global $user;
-
   // 
 
 }
@@ -194,8 +192,6 @@ function boilerplate_preprocess_page(&$vars) {
  * Implements hook_preprocess_node().
  */
 function boilerplate_preprocess_node(&$vars) {
-
-  global $user;
 
   /**
    * Per content type preprocessing.
@@ -214,8 +210,6 @@ function boilerplate_preprocess_node(&$vars) {
  * Implements hook_preprocess_field().
  */
 function boilerplate_preprocess_field(&$vars) {
-
-  global $user;
 
   /**
    * Per field preprocessing.
@@ -251,8 +245,6 @@ function boilerplate_preprocess_field(&$vars) {
  * Implements hook_preprocess_block().
  */
 function boilerplate_preprocess_block(&$vars) {
-
-  global $user;
 
   // 
 
