@@ -111,7 +111,7 @@ function boilerplate_admin_paths() {
 function boilerplate_permission() {
   return array(
     'sample permission' => array(
-      'title' => 'Sample permission rule',
+      'title' => t('Sample permission rule'),
     ),
   );
 }
@@ -157,6 +157,7 @@ function boilerplate_block_view($delta = '') {
       if (user_access('sample permission')) {
         $block['content'] .= '<p>This text is visible only to certain roles.</p>';
       }
+
       return $block;
   }
 }
@@ -174,6 +175,7 @@ function boilerplate_block_configure($delta = '') {
         '#default_value' => variable_get('boilerplate_block_count', 10),
         '#options' => drupal_map_assoc(array(2, 3, 4, 5, 6, 7, 8, 9, 10, )),
       );
+
       return $form;
   }
 }
@@ -208,7 +210,7 @@ function boilerplate_preprocess_node(&$vars) {
    */
   switch ($vars['node']->type) {
     
-    // Pages
+    // Pages.
     case 'page':
       break;
 
@@ -226,7 +228,7 @@ function boilerplate_preprocess_field(&$vars) {
    */
   switch ($vars['element']['#field_name']) {
 
-    // Sample field
+    // Sample field.
     case 'field_sample_field':
       $vars['items'][0]['#markup'] = 'Overridden value.';
       break;
@@ -234,12 +236,12 @@ function boilerplate_preprocess_field(&$vars) {
   }
 
   /**
-   * Per content type preprocessing
+   * Per content type preprocessing.
    */
   if ($vars['element']['#entity_type'] == 'node') {
     switch ($element['#object']->type) {
 
-      // Pages
+      // Pages.
       case 'page':
         if ($vars['element']['#field_name'] == 'field_sample_field') {
           $vars['items'][0]['#markup'] = 'Overridden based on content type.';
@@ -450,7 +452,6 @@ function boilerplate_sample_cached_data($reset = FALSE) {
   }
   
   return $data;
-  
 }
 
 /**
