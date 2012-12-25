@@ -310,14 +310,14 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
       $form['preview']['#access'] = false;
       break;
 
-    // Example override for node comment form.
-    case 'comment_node_type_form':
+    // Taxonomy term form.
+    case 'taxonomy_form_term':
+      // Remove the body field for taxonomy terms.
+      $form['description']['#access'] = FALSE;
       break;
 
-    // Panels edit form.
-    case 'panels_edit_display_form':
-      // Remove "Live preview".
-      $form['preview']['#access'] = FALSE;
+    // Example override for node comment form.
+    case 'comment_node_type_form':
       break;
 
     // Sample webform custom validation.
