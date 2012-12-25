@@ -310,9 +310,10 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
       $form['preview']['#access'] = false;
       break;
 
-    // Taxonomy term form.
+    // Taxonomy term and vocabulary forms.
     case 'taxonomy_form_term':
-      // Remove the body field for taxonomy terms.
+    case 'taxonomy_form_vocabulary':
+      // Remove the body field (description) fields.
       $form['description']['#access'] = FALSE;
       break;
 
