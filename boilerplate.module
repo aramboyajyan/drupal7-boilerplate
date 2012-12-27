@@ -328,6 +328,10 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
       array_unshift($form['#submit'], $first, '_boilerplate_validate_webform');
       break;
       
+    // User edit page.
+    case 'user_profile_form':
+      break;
+      
   }
 
 }
