@@ -56,7 +56,7 @@ function boilerplate_batch_finished($success, $results, $operations) {
     $message = format_plural($results['processed'], 'One node processed.', '@count nodes processed.');
   }
   else {
-    $message = 'An error occurred. Check database log for more details.';
+    $message = t('An error occurred. Check database log for more details.');
   }
   drupal_set_message($message);
 }
