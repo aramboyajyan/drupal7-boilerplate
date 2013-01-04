@@ -33,3 +33,7 @@ The module and all example code is built completely using Drupal best practices 
 - Sample filter format implementation
 - Cron lock check
 - Helper function for checking if the user has a certain role + additional helpers file?
+
+<hr>
+
+By: [topsitemakers.com](http://www.topsitemakers.com).
