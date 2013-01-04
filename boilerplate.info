@@ -10,7 +10,7 @@ name = Boilerplate
 description = Custom module boilerplate with most used hooks and functions. Created by: <a href="http://www.topsitemakers.com" target="_blank">topsitemakers.com</a>.
 package = Custom
 core = 7.x
-version = 1.0
+version = 7.x-1.0
 
 ; ------------------------------------------------------------------------------
 ; Scripts
