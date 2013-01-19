@@ -50,6 +50,7 @@ function boilerplate_schema() {
       'list' => array('weight', 'title'),
     ),
   );
+  
   return $schema;
 }
 

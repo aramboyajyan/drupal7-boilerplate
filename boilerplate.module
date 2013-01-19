@@ -9,6 +9,12 @@
  */
 
 /**
+ * Constant variables.
+ */
+// Sample constant variable placeholder.
+define('BOILERPLATE_PLACEHOLDER', 'value');
+
+/**
  * Implements hook_help().
  */
 function boilerplate_help($path, $arg) {
@@ -274,7 +280,7 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
 
     // Node comment form.
     case 'comment-form':
-      // Remove the "Your name" field; unnecessary if working with Starter theme.
+      // Remove the "Your name" field; unnecessary if the site is using Ultima.
       unset($form['author']['_author']);
       break;
 
@@ -343,6 +349,7 @@ function boilerplate_theme($existing, $type, $theme, $path) {
   // Get the path to this module and define theme dir.
   $module_path = drupal_get_path('module', 'boilerplate');
   $theme_dir   = $module_path . '/theme';
+  
   // Themable elements.
   return array(
     'sample-template' => array(
