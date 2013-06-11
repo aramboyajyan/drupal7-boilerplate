@@ -518,3 +518,17 @@ function boilerplate_get_image_styles() {
 
   return $styles;
 }
+
+/**
+ * Helper function - get the list of all users on the website. For use in
+ * administrative forms.
+ */
+function boilerplate_get_all_users($status = 1) {
+  $users = array();
+  $items = db_query("SELECT `uid`, `name` FROM {users} WHERE `status` = :status ORDER BY `name`", array(':status' => $status));
+  foreach ($items as $item) {
+    $users[$item->uid] = t('@name (ID: @uid)', array('@name' => $item->name, '@uid' => $item->uid));
+  }
+
+  return $users;
+}
