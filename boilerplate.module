@@ -493,3 +493,14 @@ function _boilerplate_validate_webform($form) {
     }
   }
 }
+
+/**
+ * Helper function - get the IP address of current user.
+ *
+ * The regex used in this function is exactly the same as the one used by
+ * WordPress to save user IP address on comment creation. For more
+ * information, see wp_new_comment() function in /wp-content/comment.php file.
+ */
+function boilerplate_get_ip_address() {
+  return preg_replace('/[^0-9a-fA-F:., ]/', '',$_SERVER['REMOTE_ADDR']);
+}
