@@ -546,3 +546,17 @@ function boilerplate_get_all_nodes($type = 'page', $status = 1) {
 
   return $nodes;
 }
+
+/**
+ * Helper function - get the list of all node types. For use in administrative
+ * forms.
+ */
+function boilerplate_get_all_node_types() {
+  $types = array();
+  $items = db_query("SELECT `type`, `name` FROM {node_type} ORDER BY `name`");
+  foreach ($items as $item) {
+    $types[$item->type] = t('@name (machine name: @machine_name)', array('@name' => $item->name, '@machine_name' => $item->type));
+  }
+
+  return $types;
+}
