@@ -504,3 +504,17 @@ function _boilerplate_validate_webform($form) {
 function boilerplate_get_ip_address() {
   return preg_replace('/[^0-9a-fA-F:., ]/', '',$_SERVER['REMOTE_ADDR']);
 }
+
+/**
+ * Helper function - get the list of all image styles on the site. For use in
+ * administrative forms.
+ */
+function boilerplate_get_image_styles() {
+  $styles = array();
+  $items = image_styles();
+  foreach ($items as $item) {
+    $styles[$item['name']] = $item['name'];
+  }
+
+  return $styles;
+}
