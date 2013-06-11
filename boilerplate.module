@@ -532,3 +532,17 @@ function boilerplate_get_all_users($status = 1) {
 
   return $users;
 }
+
+/**
+ * Helper function - get the list of all nodes of specific type. For use in
+ * administrative forms.
+ */
+function boilerplate_get_all_nodes($type = 'page', $status = 1) {
+  $nodes = array();
+  $items = db_query("SELECT `nid`, `title` FROM {node} WHERE `type` = :type AND `status` = :status ORDER BY `title`", array(':type' => $type, ':status' => $status));
+  foreach ($items as $item) {
+    $nodes[$item->nid] = t('@title (ID: @nid)', array('@title' => $item->title, '@nid' => $item->nid));
+  }
+
+  return $nodes;
+}
