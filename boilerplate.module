@@ -245,7 +245,7 @@ function boilerplate_preprocess_field(&$vars) {
    * Per content type preprocessing.
    */
   if ($vars['element']['#entity_type'] == 'node') {
-    switch ($element['#object']->type) {
+    switch ($vars['element']['#object']->type) {
 
       // Pages.
       case 'page':
