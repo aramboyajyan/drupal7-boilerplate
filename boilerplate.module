@@ -282,6 +282,10 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
     case 'comment-form':
       // Remove the "Your name" field; unnecessary if the site is using Ultima.
       unset($form['author']['_author']);
+      // Redirect back to the node form if there is a validation error on form
+      // submission. This is to avoid having separate page where the comment is
+      // displayed right under the node.
+      $form['#action'] = url('node/' . $form['#node']->nid);
       break;
 
     // User login form.
