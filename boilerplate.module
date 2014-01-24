@@ -145,7 +145,7 @@ function boilerplate_cron() {
  * Implements hook_block_info().
  */
 function boilerplate_block_info() {
-  $blocks['sample']['info']  = t('Sample block');
+  $blocks['sample']['info'] = t('Sample block');
   $blocks['sample']['properties']['administrative'] = TRUE;
   
   return $blocks;
