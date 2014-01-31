@@ -564,6 +564,20 @@ function boilerplate_get_roles() {
 }
 
 /**
+ * Helper function - check if a user has certain role.
+ */
+function boilerplate_check_if_user_has_role($rid, $uid = FALSE) {
+  // If the uid is not passed, work with the current user.
+  if (!$uid) {
+    global $user;
+    $uid = $user->uid;
+  }
+  $account = user_load($uid);
+
+  return array_key_exists($rid, $account->roles);
+}
+
+/**
  * Helper function - get the list of all nodes of specific type. For use in
  * administrative forms.
  */
