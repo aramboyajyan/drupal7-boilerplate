@@ -159,9 +159,9 @@ function boilerplate_block_view($delta = '') {
   switch ($delta) {
     case 'sample':
       $block['subject'] = NULL;
-      $block['content'] = '<p>Sample block content</p>';
+      $block['content'] = '<p>' . t('Sample block content') . '</p>';
       if (user_access('sample permission')) {
-        $block['content'] .= '<p>This text is visible only to certain roles.</p>';
+        $block['content'] .= '<p>' . t('This text is visible only to certain roles.') . '</p>';
       }
 
       return $block;
@@ -236,7 +236,7 @@ function boilerplate_preprocess_field(&$vars) {
 
     // Sample field.
     case 'field_sample_field':
-      $vars['items'][0]['#markup'] = 'Overridden value.';
+      $vars['items'][0]['#markup'] = t('Overridden value.');
       break;
 
   }
@@ -250,7 +250,7 @@ function boilerplate_preprocess_field(&$vars) {
       // Pages.
       case 'page':
         if ($vars['element']['#field_name'] == 'field_sample_field') {
-          $vars['items'][0]['#markup'] = 'Overridden based on content type.';
+          $vars['items'][0]['#markup'] = t('Overridden based on content type.');
         }
         break;
 
@@ -370,7 +370,7 @@ function boilerplate_theme($existing, $type, $theme, $path) {
 function boilerplate_page_alter(&$page) {
 
   // Add custom setting accessible in JS through Drupal.settings.boilerplate.sampleVar.
-  drupal_add_js(array('boilerplate' => array('sampleVar' => 'Custom value')), array('type' => 'setting'));
+  drupal_add_js(array('boilerplate' => array('sampleVar' => t('Custom value'))), array('type' => 'setting'));
 
   // Add content to the end of the page.
   $page['page_bottom']['boilerplate'] = array(
