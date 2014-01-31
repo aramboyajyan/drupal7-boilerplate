@@ -15,6 +15,10 @@ The module and all example code is built completely using Drupal best practices 
 - Theme/template implementation
 - Separation of module code in appropriate files (`.pages`, `.tokens`, `.forms`, `.admin`, `.batch`)
 
+### Why this module isn't on Drupal.org?
+
+This module does nothing on its own. It is opinionated and might not be suitable for anyone. However, if there is enough interest, it can be turned into a full module, hosted on Drupal.org.
+
 <hr>
 
 By: [topsitemakers.com](http://www.topsitemakers.com).
