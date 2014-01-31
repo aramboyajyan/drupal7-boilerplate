@@ -518,7 +518,7 @@ function _boilerplate_validate_webform($form) {
  * information, see wp_new_comment() function in /wp-content/comment.php file.
  */
 function boilerplate_get_ip_address() {
-  return preg_replace('/[^0-9a-fA-F:., ]/', '',$_SERVER['REMOTE_ADDR']);
+  return preg_replace('/[^0-9a-fA-F:., ]/', '', $_SERVER['REMOTE_ADDR']);
 }
 
 /**
@@ -575,4 +575,18 @@ function boilerplate_get_all_node_types() {
   }
 
   return $types;
+}
+
+/**
+ * Helper function - get the list of all image styles on the site. For use in
+ * administrative forms.
+ */
+function boilerplate_get_image_styles() {
+  $styles = array();
+  $items = image_styles();
+  foreach ($items as $item) {
+    $styles[$item['name']] = $item['name'];
+  }
+
+  return $styles;
 }
