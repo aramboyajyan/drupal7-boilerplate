@@ -550,6 +550,20 @@ function boilerplate_get_all_users($status = 1) {
 }
 
 /**
+ * Helper function - get the list of all roles on the website. For use in
+ * administrative forms.
+ */
+function boilerplate_get_roles() {
+  $roles = array();
+  $items = db_query("SELECT rid, name FROM {role} ORDER BY weight ASC");
+  foreach ($items as $item) {
+    $roles[$item->rid] = t('@name (ID: @rid)', array('@name' => ucfirst($item->name), '@rid' => $item->rid));
+  }
+
+  return $roles;
+}
+
+/**
  * Helper function - get the list of all nodes of specific type. For use in
  * administrative forms.
  */
