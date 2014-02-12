@@ -607,17 +607,3 @@ function _boilerplate_get_all_node_types() {
 
   return $types;
 }
-
-/**
- * Helper function - get the list of all image styles on the site. For use in
- * administrative forms.
- */
-function _boilerplate_get_image_styles() {
-  $styles = array();
-  $items = image_styles();
-  foreach ($items as $item) {
-    $styles[$item['name']] = $item['name'];
-  }
-
-  return $styles;
-}
