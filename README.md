@@ -13,7 +13,7 @@ The module and all example code is built completely using Drupal best practices 
 - Node and user tabs integration
 - Webform field implementation
 - Theme/template implementation
-- Separation of module code in appropriate files (`.pages`, `.tokens`, `.forms`, `.admin`, `.batch`)
+- Separation of module code in appropriate files (' %}.pages' %}, ' %}.tokens' %}, ' %}.forms' %}, ' %}.admin' %}, ' %}.batch' %})
 
 ### Why this module isn't on Drupal.org?
 
