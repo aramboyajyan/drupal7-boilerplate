@@ -513,7 +513,7 @@ function _boilerplate_validate_webform($form) {
 /**
  * Helper function - generate a random string.
  */
-function boilerplate_generate_random_string($length = 32) {
+function _boilerplate_generate_random_string($length = 32) {
   $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';  
   $size  = strlen($chars);
   $str   = '';
@@ -528,7 +528,7 @@ function boilerplate_generate_random_string($length = 32) {
  * Helper function - get the list of all image styles on the site. For use in
  * administrative forms.
  */
-function boilerplate_get_image_styles() {
+function _boilerplate_get_image_styles() {
   $styles = array();
   $items = image_styles();
   foreach ($items as $item) {
@@ -542,7 +542,7 @@ function boilerplate_get_image_styles() {
  * Helper function - get the list of all users on the website. For use in
  * administrative forms.
  */
-function boilerplate_get_all_users($status = 1) {
+function _boilerplate_get_all_users($status = 1) {
   $users = array();
   $items = db_query("SELECT uid, name FROM {users} WHERE status = :status ORDER BY name", array(':status' => $status));
   foreach ($items as $item) {
@@ -556,7 +556,7 @@ function boilerplate_get_all_users($status = 1) {
  * Helper function - get the list of all roles on the website. For use in
  * administrative forms.
  */
-function boilerplate_get_roles() {
+function _boilerplate_get_roles() {
   $roles = array();
   $items = db_query("SELECT rid, name FROM {role} ORDER BY weight ASC");
   foreach ($items as $item) {
@@ -569,7 +569,7 @@ function boilerplate_get_roles() {
 /**
  * Helper function - check if a user has certain role.
  */
-function boilerplate_check_if_user_has_role($rid, $uid = FALSE) {
+function _boilerplate_check_if_user_has_role($rid, $uid = FALSE) {
   // If the uid is not passed, work with the current user.
   if (!$uid) {
     global $user;
@@ -584,7 +584,7 @@ function boilerplate_check_if_user_has_role($rid, $uid = FALSE) {
  * Helper function - get the list of all nodes of specific type. For use in
  * administrative forms.
  */
-function boilerplate_get_all_nodes($type = 'page', $status = 1) {
+function _boilerplate_get_all_nodes($type = 'page', $status = 1) {
   $nodes = array();
   $items = db_query("SELECT nid, title FROM {node} WHERE type = :type AND status = :status ORDER BY title", array(':type' => $type, ':status' => $status));
   foreach ($items as $item) {
@@ -598,7 +598,7 @@ function boilerplate_get_all_nodes($type = 'page', $status = 1) {
  * Helper function - get the list of all node types. For use in administrative
  * forms.
  */
-function boilerplate_get_all_node_types() {
+function _boilerplate_get_all_node_types() {
   $types = array();
   $items = db_query("SELECT type, name FROM {node_type} ORDER BY name");
   foreach ($items as $item) {
@@ -612,7 +612,7 @@ function boilerplate_get_all_node_types() {
  * Helper function - get the list of all image styles on the site. For use in
  * administrative forms.
  */
-function boilerplate_get_image_styles() {
+function _boilerplate_get_image_styles() {
   $styles = array();
   $items = image_styles();
   foreach ($items as $item) {
