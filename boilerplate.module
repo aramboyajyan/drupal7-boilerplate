@@ -489,7 +489,7 @@ function boilerplate_sample_cached_data($reset = FALSE) {
  */
 function _boilerplate_get_nodes() {
   $nodes = array();
-  $nodes_query = db_query("SELECT `nid`, `title` FROM {node} WHERE `status` = 1 ORDER BY `title`");
+  $nodes_query = db_query("SELECT nid, title FROM {node} WHERE status = 1 ORDER BY title");
   foreach ($nodes_query as $node) {
     $nodes[$node->nid] = $node->title;
   }
@@ -544,7 +544,7 @@ function _boilerplate_get_image_styles() {
  */
 function _boilerplate_get_all_users($status = 1) {
   $users = array();
-  $items = db_query("SELECT `uid`, `name` FROM {users} WHERE `status` = :status ORDER BY `name`", array(':status' => $status));
+  $items = db_query("SELECT uid, name FROM {users} WHERE status = :status ORDER BY name", array(':status' => $status));
   foreach ($items as $item) {
     $users[$item->uid] = t('@name (ID: @uid)', array('@name' => $item->name, '@uid' => $item->uid));
   }
@@ -586,7 +586,7 @@ function _boilerplate_check_if_user_has_role($rid, $uid = FALSE) {
  */
 function _boilerplate_get_all_nodes($type = 'page', $status = 1) {
   $nodes = array();
-  $items = db_query("SELECT `nid`, `title` FROM {node} WHERE `type` = :type AND `status` = :status ORDER BY `title`", array(':type' => $type, ':status' => $status));
+  $items = db_query("SELECT nid, title FROM {node} WHERE type = :type AND status = :status ORDER BY title", array(':type' => $type, ':status' => $status));
   foreach ($items as $item) {
     $nodes[$item->nid] = t('@title (ID: @nid)', array('@title' => $item->title, '@nid' => $item->nid));
   }
@@ -600,7 +600,7 @@ function _boilerplate_get_all_nodes($type = 'page', $status = 1) {
  */
 function _boilerplate_get_all_node_types() {
   $types = array();
-  $items = db_query("SELECT `type`, `name` FROM {node_type} ORDER BY `name`");
+  $items = db_query("SELECT type, name FROM {node_type} ORDER BY name");
   foreach ($items as $item) {
     $types[$item->type] = t('@name (machine name: @machine_name)', array('@name' => $item->name, '@machine_name' => $item->type));
   }
