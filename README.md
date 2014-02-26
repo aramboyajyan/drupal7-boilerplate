@@ -14,6 +14,16 @@ The module and all example code is built completely using Drupal best practices 
 - Webform field implementation
 - Theme/template implementation
 - Separation of module code in appropriate files (`.pages`, `.tokens`, `.forms`, `.admin`, `.batch`)
+- Custom helper functions for:
+    - Generating a random string of arbitrary length
+    - Get the list of all image styles on the site *
+    - Get the list of all nodes on the site *
+    - Get the list of all node types on the site *
+    - Get the list of all users on the site *
+    - Get the list of all roles on the site *
+    - Check if a user has a specific role
+
+* Admin form friendly - means you can use this output directly in select boxes or radio fields in admin forms.
 
 ### Why this module isn't on Drupal.org?
 
