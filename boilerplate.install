@@ -63,13 +63,13 @@ function boilerplate_install() {
   // Update the system weight and place it after a certain module.
   $weight = db_select('system', 's')
               ->fields('s', array('weight'))
-              ->condition('name', 'node', '=')
+              ->condition('name', 'node')
               ->execute()
               ->fetchField();
 
   db_update('system')
     ->fields(array('weight' => $weight + 1))
-    ->condition('name', 'boilerplate', '=')
+    ->condition('name', 'boilerplate')
     ->execute();
   */
   
