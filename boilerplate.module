@@ -440,7 +440,7 @@ function boilerplate_user_view($account, $view_mode, $langcode) {
 function boilerplate_webform_select_options_info() {
   $items['nodes'] = array(
     'title' => t('List of published nodes'),
-    'options callback' => '_boilerplate_get_nodes',
+    'options callback' => '_boilerplate_get_all_nodes',
   );
   
   return $items;
@@ -505,21 +505,6 @@ function boilerplate_sample_cached_data($reset = FALSE) {
   }
   
   return $data;
-}
-
-/**
- * Sample function - get the list of published nodes on the site.
- *
- * Used for sample webform element.
- */
-function _boilerplate_get_nodes() {
-  $nodes = array();
-  $nodes_query = db_query("SELECT nid, title FROM {node} WHERE status = 1 ORDER BY title");
-  foreach ($nodes_query as $node) {
-    $nodes[$node->nid] = $node->title;
-  }
-  
-  return $nodes;
 }
 
 /**
@@ -609,11 +594,24 @@ function _boilerplate_check_if_user_has_role($rid, $uid = FALSE) {
  * Helper function - get the list of all nodes of specific type. For use in
  * administrative forms.
  */
-function _boilerplate_get_all_nodes($type = 'page', $status = 1) {
+function _boilerplate_get_all_nodes($type = NULL, $status = NODE_PUBLISHED) {
+  $query = db_select('node', 'n')
+    ->addTag('node_access')
+    ->fields('n', array('nid', 'title'))
+    ->condition('status', $status)
+    ->orderBy('title', 'ASC');
+
+  if (!empty($type)) {
+    $query->condition('type', $type);
+  }
+
+  $results = $query
+    ->execute()
+    ->fetchAll();
+
   $nodes = array();
-  $items = db_query("SELECT nid, title FROM {node} WHERE type = :type AND status = :status ORDER BY title", array(':type' => $type, ':status' => $status));
-  foreach ($items as $item) {
-    $nodes[$item->nid] = t('@title (ID: @nid)', array('@title' => $item->title, '@nid' => $item->nid));
+  foreach ($results as $result) {
+    $nodes[$result->nid] = t('@title (ID: @nid)', array('@title' => $result->title, '@nid' => $result->nid));
   }
 
   return $nodes;
