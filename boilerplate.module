@@ -188,7 +188,7 @@ function boilerplate_block_configure($delta = '') {
         '#type' => 'select',
         '#title' => t('Sample counting'),
         '#default_value' => variable_get('boilerplate_block_count', 10),
-        '#options' => drupal_map_assoc(array(2, 3, 4, 5, 6, 7, 8, 9, 10, )),
+        '#options' => drupal_map_assoc(array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)),
       );
 
       return $form;
