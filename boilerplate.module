@@ -444,6 +444,10 @@ function boilerplate_wysiwyg_editor_settings_alter(&$settings, $context) {
     // the editor does not remove tag attributes (e.g. "class" attribute).
     // For more information see: https://drupal.org/node/1956778
     $settings['allowedContent'] = TRUE;
+    // Set the height of CKEditor editable area to 200px. The editor does not
+    // take into account the number of textarea rows entered in field admin
+    // settings.
+    $settings['height'] = 200;
   }
 }
 
