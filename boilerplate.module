@@ -136,8 +136,17 @@ function boilerplate_views_api() {
  * Implements hook_cron().
  */
 function boilerplate_cron() {
-  
-  // 
+
+  // In order to avoid situation when the operation is called multiple times,
+  // before processing our operations we will make sure that the operation is
+  // not already running by acquiring the cron lock.
+  // This is important in cases when the cron runs are very frequent, e.g. every
+  // minute.
+  if (lock_acquire('boilerplate_cron_lock')) {
+    watchdog('boilerplate_cron', 'Cron hook executed.');
+    // Release the lock, so the next cron run can continue running the process.
+    lock_release('boilerplate_cron_lock');
+  }
 
 }
 
