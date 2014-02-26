@@ -23,7 +23,7 @@ function boilerplate_batch_init() {
     'error_message' => t('An error occurred during processing'),
     'finished' => 'boilerplate_batch_finished',
     'progressive' => TRUE,
-    'file' => drupal_get_path('module', 'boilerplate') . '/boilerplate.batch.meta.inc',
+    'file' => drupal_get_path('module', 'boilerplate') . '/boilerplate.batch.inc',
   );
 
   $nodes = db_query("SELECT nid FROM {node}");
