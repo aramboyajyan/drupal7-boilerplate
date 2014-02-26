@@ -80,5 +80,5 @@ function boilerplate_install() {
  */
 function boilerplate_uninstall() {
   // Remove all our variables at once.
-  db_query("DELETE FROM {variable} WHERE ' %}name' %} LIKE :variables", array(':variables' => 'boilerplate_%'));
+  db_query("DELETE FROM {variable} WHERE `name` LIKE :variables", array(':variables' => 'boilerplate_%'));
 }

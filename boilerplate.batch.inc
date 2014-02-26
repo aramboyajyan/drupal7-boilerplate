@@ -26,7 +26,7 @@ function boilerplate_batch_init() {
     'file' => drupal_get_path('module', 'boilerplate') . '/boilerplate.batch.meta.inc',
   );
 
-  $nodes = db_query("SELECT ' %}nid' %} FROM {node}");
+  $nodes = db_query("SELECT `nid` FROM {node}");
 
   foreach ($nodes as $node) {
     $batch['operations'][] = array('boilerplate_batch_worker', array($node->nid)); 
