@@ -33,7 +33,7 @@ function boilerplate_batch_init() {
   }
 
   batch_set($batch);
-  batch_process('<front>');
+  batch_process('admin/config');
 }
 
 /**

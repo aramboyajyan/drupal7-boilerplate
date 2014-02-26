@@ -37,4 +37,4 @@ files[] = boilerplate.test
 ; Other
 ; ----------------------------------------------------------------------------
 ; Configuration URL
-configure = admin/config/development/boilerplate
+configure = admin/config/boilerplate/settings

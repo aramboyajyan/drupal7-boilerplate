@@ -65,7 +65,17 @@ function boilerplate_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'boilerplate.pages.inc',
   );
-  $items['admin/config/development/boilerplate'] = array(
+  $items['admin/config/boilerplate'] = array(
+    'title' => 'Boilerplate settings',
+    'page callback' => 'system_admin_menu_block_page',
+    'page arguments' => array(),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+    'position' => 'right',
+    'weight' => -30,
+  );
+  $items['admin/config/boilerplate/settings'] = array(
     'title' => 'Sample settings page',
     'description' => 'This is a sample configuration page generated from the Boilerplate module.',
     'page callback' => 'drupal_get_form',
@@ -73,12 +83,11 @@ function boilerplate_menu() {
     'access arguments' => array('administer site configuration'),
     'file' => 'boilerplate.admin.inc',
   );
-  $items['admin/config/development/boilerplate/batch'] = array(
+  $items['admin/config/boilerplate/batch'] = array(
     'title' => 'Sample batch process',
     'description' => 'This is a sample page that will initiate a batch process',
     'page callback' => 'boilerplate_batch_init',
     'access arguments' => array('administer content'),
-    'type' => MENU_CALLBACK,
     'file' => 'boilerplate.batch.inc',
   );
   $items['user/%user/boilerplate'] = array(
