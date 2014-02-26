@@ -369,7 +369,8 @@ function boilerplate_theme($existing, $type, $theme, $path) {
  */
 function boilerplate_page_alter(&$page) {
 
-  // Add custom setting accessible in JS through Drupal.settings.boilerplate.sampleVar.
+  // Add custom setting accessible in JS through
+  // Drupal.settings.boilerplate.sampleVar.
   drupal_add_js(array('boilerplate' => array('sampleVar' => t('Custom value'))), array('type' => 'setting'));
 
   // Add content to the end of the page.

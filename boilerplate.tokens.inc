@@ -26,6 +26,7 @@ function boilerplate_token_info() {
     'name' => t('MD5 Time'),
     'description' => t('Generates an MD5 hash of current time.'),
   );
+  
   return array(
     'types' => $types,
     'tokens' => array(

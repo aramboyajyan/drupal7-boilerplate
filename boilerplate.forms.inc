@@ -25,6 +25,7 @@ function boilerplate_sample_form() {
   );
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Submit the form'));
+  
   return $form;
 }
 
