@@ -14,7 +14,6 @@ The module and all example code is built completely using Drupal best practices 
 - Webform field implementation
 - Theme/template implementation
 - Separation of module code in appropriate files (`.pages`, `.tokens`, `.forms`, `.admin`, `.batch`)
-<<<<<<< HEAD
 - Custom helper functions for:
     - Generating a random string of arbitrary length
     - Get the list of all image styles on the site *
