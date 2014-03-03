@@ -570,10 +570,23 @@ function _boilerplate_get_image_styles() {
 /**
  * Helper function - get the list of all users on the website. For use in
  * administrative forms.
+ *
+ * Optionally filter by a certain role.
  */
-function _boilerplate_get_all_users($status = 1) {
+function _boilerplate_get_all_users($status = 1, $rids = NULL) {
   $users = array();
-  $items = db_query("SELECT uid, name FROM {users} WHERE status = :status ORDER BY name", array(':status' => $status));
+  $query = db_select('users', 'u')
+    ->fields('u', array('uid', 'name'))
+    ->condition('status', $status);
+
+  if ($rids) {
+    $query->leftJoin('users_roles', 'ur', 'ur.uid = u.uid');
+    $query->leftJoin('role', 'r', 'r.rid = ur.rid');
+    $query->condition('r.rid', $rids);
+  }
+
+  $items = $query->execute();
+
   foreach ($items as $item) {
     $users[$item->uid] = t('@name (ID: @uid)', array('@name' => $item->name, '@uid' => $item->uid));
   }
