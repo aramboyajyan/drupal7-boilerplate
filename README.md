@@ -14,14 +14,15 @@ The module and all example code is built completely using Drupal best practices 
 - Webform field implementation
 - Theme/template implementation
 - Separation of module code in appropriate files (`.pages`, `.tokens`, `.forms`, `.admin`, `.batch`)
+- Email implementation, including both - text only (default) and rich (HTML) emails
 - Custom helper functions for:
     - Generating a random string of arbitrary length
-    - Get the list of all image styles on the site *
-    - Get the list of all nodes on the site *
-    - Get the list of all node types on the site *
-    - Get the list of all users on the site *
-    - Get the list of all roles on the site *
-    - Get the list of all vocabularies on the site *
+    - Get the list of all image styles on the site `*`
+    - Get the list of all nodes on the site `*`
+    - Get the list of all node types on the site `*`
+    - Get the list of all users on the site `*`
+    - Get the list of all roles on the site `*`
+    - Get the list of all vocabularies on the site `*`
     - Check if a user has a specific role
     - Secure string comparison from [HTTP Auth library of Zend Framework](http://stackoverflow.com/q/10576827/1520477)
 

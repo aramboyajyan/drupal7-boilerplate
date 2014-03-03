@@ -411,9 +411,16 @@ function boilerplate_mail($key, &$message, $params) {
     '!subject' => $params['subject'],
   );
   switch ($key) {
-    case 'sample_mail':
+    case 'sample_text_mail':
       $message['subject'] .= t('!subject', $variables, array('langcode' => $language->language));
       $message['body'][] = t('Just a sample email sent from !site-name to demonstrate the hook_mail() function.', $variables, array('langcode' => $language->language));
+      $message['body'][] = $params['message'];
+      break;
+
+    case 'sample_html_mail':
+      $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+      $message['subject'] .= t('!subject', $variables, array('langcode' => $language->language));
+      $message['body'][] = t('Just a sample <b>HTML</b> <i>email</i> sent from !site-name to demonstrate the hook_mail() function.', $variables, array('langcode' => $language->language));
       $message['body'][] = $params['message'];
       break;
   }
@@ -477,8 +484,20 @@ function boilerplate_wysiwyg_editor_settings_alter(&$settings, $context) {
 function boilerplate_sample_send_email() {
   global $user;
   $values['sender'] = $user;
-  drupal_mail('boilerplate', 'sample_mail', 'email@to.com', language_default(), $values, 'email@from.com');
+
+  // Send the default, text-only email.
+  drupal_mail('boilerplate', 'sample_text_mail', 'email@to.com', language_default(), $values, 'email@from.com');
+
+  // Send the rich, HTML email. Note: we have to switch to the HTML Mail System
+  // and then back to the default one.
+  variable_set('mail_system', array('default-system' => 'HTMLMailSystem'));
+  drupal_mail('boilerplate', 'sample_html_mail', 'email@to.com', language_default(), $values, 'email@from.com');
+  variable_set('mail_system', array('default-system' => 'DefaultMailSystem'));
+
+  // Register a flood event, which will prevent mindless submissions.
   flood_register_event('boilerplate', 3600);
+
+  // Register this event in the log.
   watchdog('mail', '%sender-name (@sender-from) sent an e-mail regarding %category.', array('%sender-name' => $values['name'], '@sender-from' => $from, '%category' => $values['category']['category']));
 }
 
@@ -660,4 +679,50 @@ function _boilerplate_secure_compare($a, $b) {
     $result |= ord($a[$i]) ^ ord($b[$i]);
   }
   return $result == 0;
+}
+
+/**
+ * Modify the Drupal mail system to send HTML emails.
+ *
+ * In order to send HTML email instead of default, plain text emails, we have to
+ * extend Drupal's MainSystemInterface class and provide our own way of
+ * formatting the messages.
+ * 
+ * When we want to use HTML email parsing instead of the default one, we have to
+ * temporarily switch to the HTML, send emails and then switch back to the 
+ * default plain text parsing.
+ * 
+ * Example:
+ * 
+ *    variable_set('mail_system', array('default-system' => 'HTMLMailSystem'));
+ *    drupal_mail('regular parameters go here');
+ *    variable_set('mail_system', array('default-system' => 'DefaultMailSystem'));
+ */
+class HTMLMailSystem implements MailSystemInterface {
+
+  /**
+   * Concatenate and wrap the email body for plain-text mails.
+   */
+  public function format(array $message) {
+    $message['body'] = implode("\n\n", $message['body']);
+    return $message;
+  }
+
+  /**
+   * Send an email message, using Drupal variables and default settings..
+   */
+  public function mail(array $message) {
+    $mimeheaders = array();
+    foreach ($message['headers'] as $name => $value) {
+      $mimeheaders[] = $name . ': ' . mime_header_encode($value);
+    }
+    $line_endings = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
+    return mail(
+      $message['to'],
+      mime_header_encode($message['subject']),
+      preg_replace('@\r?\n@', $line_endings, $message['body']),
+      join("\n", $mimeheaders)
+    );
+  }
+
 }
