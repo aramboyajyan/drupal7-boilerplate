@@ -559,9 +559,9 @@ function _boilerplate_generate_random_string($length = 32) {
  */
 function _boilerplate_get_image_styles() {
   $styles = array();
-  $items = image_styles();
-  foreach ($items as $item) {
-    $styles[$item['name']] = $item['name'];
+  $results = image_styles();
+  foreach ($results as $result) {
+    $styles[$result['name']] = $result['name'];
   }
 
   return $styles;
@@ -578,17 +578,14 @@ function _boilerplate_get_all_users($status = 1, $rids = NULL) {
   $query = db_select('users', 'u')
     ->fields('u', array('uid', 'name'))
     ->condition('status', $status);
-
   if ($rids) {
     $query->leftJoin('users_roles', 'ur', 'ur.uid = u.uid');
     $query->leftJoin('role', 'r', 'r.rid = ur.rid');
     $query->condition('r.rid', $rids);
   }
-
-  $items = $query->execute();
-
-  foreach ($items as $item) {
-    $users[$item->uid] = t('@name (ID: @uid)', array('@name' => $item->name, '@uid' => $item->uid));
+  $results = $query->execute();
+  foreach ($results as $result) {
+    $users[$result->uid] = t('@name (ID: @uid)', array('@name' => $result->name, '@uid' => $result->uid));
   }
 
   return $users;
@@ -600,9 +597,9 @@ function _boilerplate_get_all_users($status = 1, $rids = NULL) {
  */
 function _boilerplate_get_roles() {
   $roles = array();
-  $items = db_query("SELECT rid, name FROM {role} ORDER BY weight ASC");
-  foreach ($items as $item) {
-    $roles[$item->rid] = t('@name (ID: @rid)', array('@name' => ucfirst($item->name), '@rid' => $item->rid));
+  $results = db_query("SELECT rid, name FROM {role} ORDER BY weight ASC");
+  foreach ($results as $result) {
+    $roles[$result->rid] = t('@name (ID: @rid)', array('@name' => ucfirst($result->name), '@rid' => $result->rid));
   }
 
   return $roles;
@@ -632,15 +629,12 @@ function _boilerplate_get_all_nodes($type = NULL, $status = NODE_PUBLISHED) {
     ->fields('n', array('nid', 'title'))
     ->condition('status', $status)
     ->orderBy('title', 'ASC');
-
   if (!empty($type)) {
     $query->condition('type', $type);
   }
-
   $results = $query
     ->execute()
     ->fetchAll();
-
   $nodes = array();
   foreach ($results as $result) {
     $nodes[$result->nid] = t('@title (ID: @nid)', array('@title' => $result->title, '@nid' => $result->nid));
@@ -655,9 +649,9 @@ function _boilerplate_get_all_nodes($type = NULL, $status = NODE_PUBLISHED) {
  */
 function _boilerplate_get_all_node_types() {
   $types = array();
-  $items = db_query("SELECT type, name FROM {node_type} ORDER BY name");
-  foreach ($items as $item) {
-    $types[$item->type] = t('@name (machine name: @machine_name)', array('@name' => $item->name, '@machine_name' => $item->type));
+  $results = db_query("SELECT type, name FROM {node_type} ORDER BY name");
+  foreach ($results as $result) {
+    $types[$result->type] = t('@name (machine name: @machine_name)', array('@name' => $result->name, '@machine_name' => $result->type));
   }
 
   return $types;
@@ -669,9 +663,9 @@ function _boilerplate_get_all_node_types() {
  */
 function _boilerplate_get_all_vocabularies() {
   $vocabularies = array();
-  $items = db_query("SELECT vid, name FROM {taxonomy_vocabulary} ORDER BY weight ASC");
-  foreach ($items as $item) {
-    $vocabularies[$item->vid] = t('@vocabulary (VID: @vid)', array('@vocabulary' => $item->name, '@vid' => $item->vid));
+  $results = db_query("SELECT vid, name FROM {taxonomy_vocabulary} ORDER BY weight ASC");
+  foreach ($results as $result) {
+    $vocabularies[$result->vid] = t('@vocabulary (VID: @vid)', array('@vocabulary' => $result->name, '@vid' => $result->vid));
   }
 
   return $vocabularies;
