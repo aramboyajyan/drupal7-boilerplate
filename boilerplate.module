@@ -632,6 +632,20 @@ function _boilerplate_get_all_node_types() {
 }
 
 /**
+ * Helper function - get the list of all vocabularies. For use in administrative
+ * forms.
+ */
+function _boilerplate_get_all_vocabularies() {
+  $vocabularies = array();
+  $items = db_query("SELECT vid, name FROM {taxonomy_vocabulary} ORDER BY weight ASC");
+  foreach ($items as $item) {
+    $vocabularies[$item->vid] = t('@vocabulary (VID: @vid)', array('@vocabulary' => $item->name, '@vid' => $item->vid));
+  }
+
+  return $vocabularies;
+}
+
+/**
  * Helper function - secure string comparison.
  *
  * Taken from HTTP Auth library of Zend Framework.
