@@ -515,11 +515,13 @@ function boilerplate_sample_cached_data($reset = FALSE) {
       $data = unserialize($cache->data);
     }
     else {
-      // Regenerate the data.
+      // Regenerate the data. Place here any custom functions or queries to
+      // perform resource intensive tasks.
       $data = array(1, 2, 3);
       // Save the data in cache; if it's an array serialize it
-      // Last parameter is expiration; CACHE_PERMANENT, CACHE_TEMPORARY or timestamp.
-      cache_set('boilerplate_sample_data', serialize($data), 'cache', REQUEST_TIME + 1*24*60*60);
+      // Last parameter is expiration; CACHE_PERMANENT, CACHE_TEMPORARY or
+      // timestamp. In the case below, cache is set to 1 full day.
+      cache_set('boilerplate_sample_data', serialize($data), 'cache', REQUEST_TIME + 1 * 24 * 60 * 60);
     }
   }
   
