@@ -24,6 +24,7 @@ The module and all example code is built completely using Drupal best practices 
     - Get the list of all roles on the site `*`
     - Get the list of all vocabularies on the site `*`
     - Check if a user has a specific role
+    - Check if a request is an AJAX request. Useful when overriding tricky form elements, e.g. setting a default value on [Addressfield](https://drupal.org/project/addressfield) on checkout page with [Commerce](https://drupal.org/project/commerce).
     - Secure string comparison from [HTTP Auth library of Zend Framework](http://stackoverflow.com/q/10576827/1520477)
 
 `*` Admin form friendly - means you can use this output directly in select boxes or radio fields in admin forms.
