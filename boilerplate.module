@@ -334,6 +334,15 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
    */
   switch ($form_id) {
 
+    // Node type form.
+    case 'node_type_form':
+      // Automatically check the "Revisioning" checkbox for all new content
+      // types.
+      if (isset($form['#node_type']->is_new)) {
+        $form['workflow']['node_options']['#default_value'][] = 'revision';
+      }
+      break;
+
     // Panels edit form.
     case 'panels_edit_display_form':
       // Remove "Live preview"
