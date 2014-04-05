@@ -513,6 +513,9 @@ function boilerplate_sample_send_email() {
     // Register a flood event, which will prevent mindless submissions.
     flood_register_event('boilerplate', 3600);
 
+    // Invoke our custom event.
+    rules_invoke_event('boilerplate_email_is_sent', $account);
+
     // Register this event in the log.
     watchdog('mail', '%sender-name (@sender-from) sent an e-mail.', array(
       '%sender-name' => $values['name'],
