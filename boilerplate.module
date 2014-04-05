@@ -417,7 +417,7 @@ function boilerplate_mail($key, &$message, $params) {
   $language = $message['language'];
   $variables = array(
     '!site-name' => variable_get('site_name', 'Drupal'),
-    '!subject' => $params['subject'],
+    '!subject'   => $params['subject'],
   );
   switch ($key) {
     case 'sample_text_mail':
@@ -492,22 +492,33 @@ function boilerplate_wysiwyg_editor_settings_alter(&$settings, $context) {
  */
 function boilerplate_sample_send_email() {
   global $user;
-  $values['sender'] = $user;
 
-  // Send the default, text-only email.
-  drupal_mail('boilerplate', 'sample_text_mail', 'email@to.com', language_default(), $values, 'email@from.com');
+  // Send email only if the user is logged in.
+  if ($user->uid) {
+    $account = user_load($user->uid);
+    $values['sender']  = $account;
+    $values['subject'] = 'Sample email subject';
+    $values['message'] = 'Sample email body';
+    $values['name']    = $account->name;
 
-  // Send the rich, HTML email. Note: we have to switch to the HTML Mail System
-  // and then back to the default one.
-  variable_set('mail_system', array('default-system' => 'HTMLMailSystem'));
-  drupal_mail('boilerplate', 'sample_html_mail', 'email@to.com', language_default(), $values, 'email@from.com');
-  variable_set('mail_system', array('default-system' => 'DefaultMailSystem'));
+    // Send the default, text-only email.
+    drupal_mail('boilerplate', 'sample_text_mail', 'email@to.com', language_default(), $values, 'email@from.com');
 
-  // Register a flood event, which will prevent mindless submissions.
-  flood_register_event('boilerplate', 3600);
+    // Send the rich, HTML email. Note: we have to switch to the HTML Mail System
+    // and then back to the default one.
+    variable_set('mail_system', array('default-system' => 'HTMLMailSystem'));
+    drupal_mail('boilerplate', 'sample_html_mail', 'email@to.com', language_default(), $values, 'email@from.com');
+    variable_set('mail_system', array('default-system' => 'DefaultMailSystem'));
 
-  // Register this event in the log.
-  watchdog('mail', '%sender-name (@sender-from) sent an e-mail regarding %category.', array('%sender-name' => $values['name'], '@sender-from' => $from, '%category' => $values['category']['category']));
+    // Register a flood event, which will prevent mindless submissions.
+    flood_register_event('boilerplate', 3600);
+
+    // Register this event in the log.
+    watchdog('mail', '%sender-name (@sender-from) sent an e-mail.', array(
+      '%sender-name' => $values['name'],
+      '@sender-from' => $account->mail
+    ));
+  }
 }
 
 /**
