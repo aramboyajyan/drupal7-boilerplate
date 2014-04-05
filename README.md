@@ -10,6 +10,8 @@ The module and all example code is built completely using Drupal best practices 
 - Cron integration
 - Token integration
 - Skinr integration
+- Rules integration
+- Drush integration
 - Node and user tabs integration
 - Webform field implementation
 - Theme/template implementation
@@ -28,6 +30,10 @@ The module and all example code is built completely using Drupal best practices 
     - Secure string comparison from [HTTP Auth library of Zend Framework](http://stackoverflow.com/q/10576827/1520477)
 
 `*` Admin form friendly - means you can use this output directly in select boxes or radio fields in admin forms.
+
+### Why are all those implementations necessary?
+
+Most bigger websites will have a main custom module, with general system modifications or general features and additional custom modules focused on a particular functionality. This boilerplate is suitable for creating that *main* module.
 
 ### Why this module isn't on Drupal.org?
 
