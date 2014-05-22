@@ -118,7 +118,11 @@ function boilerplate_menu() {
  */
 function boilerplate_admin_paths() {
   return array(
+    // This is just a sample page that shows how to declare administrative
+    // paths.
     'arguments/*' => TRUE,
+    // Use administrative theme when editing panel nodes.
+    'node/*/panel_layout' => TRUE
   );
 }
 
