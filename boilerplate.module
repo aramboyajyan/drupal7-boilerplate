@@ -481,8 +481,9 @@ function boilerplate_skinr_api_2() {
 function boilerplate_sample_send_email() {
   global $user;
 
-  // Send email only if the user is logged in.
-  if ($user->uid) {
+  // Send email only if the user is logged in and allow to do this only once in
+  // 1 hour as an anti-flood mechanism.
+  if ($user->uid && flood_is_allowed('boilerplate_sample_send_email', 1)) {
     $account = user_load($user->uid);
     $values['sender']  = $account;
     $values['subject'] = 'Sample email subject';
@@ -498,8 +499,9 @@ function boilerplate_sample_send_email() {
     drupal_mail('boilerplate', 'sample_html_mail', 'email@to.com', language_default(), $values, 'email@from.com');
     variable_set('mail_system', array('default-system' => 'DefaultMailSystem'));
 
-    // Register a flood event, which will prevent mindless submissions.
-    flood_register_event('boilerplate', 3600);
+    // Register a flood event, which will prevent mindless submissions. Second
+    // parameter defines the window.
+    flood_register_event('boilerplate_sample_send_email', 60 * 60);
 
     // Invoke our custom event.
     rules_invoke_event('boilerplate_email_is_sent', $account);
