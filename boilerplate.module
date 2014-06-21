@@ -476,22 +476,6 @@ function boilerplate_skinr_api_2() {
 }
 
 /**
- * Implements hook_wysiwyg_editor_settings_alter().
- */
-function boilerplate_wysiwyg_editor_settings_alter(&$settings, $context) {
-  if ($context['profile']->editor == 'ckeditor') {
-    // This fix is necessary if the website is using CKEditor with WYSIWYG, so
-    // the editor does not remove tag attributes (e.g. "class" attribute).
-    // For more information see: https://drupal.org/node/1956778
-    $settings['allowedContent'] = TRUE;
-    // Set the height of CKEditor editable area to 200px. The editor does not
-    // take into account the number of textarea rows entered in field admin
-    // settings.
-    $settings['height'] = 200;
-  }
-}
-
-/**
  * Sample function - send an email.
  */
 function boilerplate_sample_send_email() {
