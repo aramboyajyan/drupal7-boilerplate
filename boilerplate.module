@@ -711,6 +711,17 @@ function _boilerplate_is_ajax_request() {
 }
 
 /**
+ * Helper function - trim a string.
+ */
+function _boilerplate_trim_string_with_ellipsis($string, $length) {
+  if (strlen($string) > $length) {
+    $string = substr($string, 0, $length) . '&hellip;';
+  }
+
+  return $string;
+}
+
+/**
  * Modify the Drupal mail system to send HTML emails.
  *
  * In order to send HTML email instead of default, plain text emails, we have to
