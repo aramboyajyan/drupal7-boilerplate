@@ -680,7 +680,7 @@ function _boilerplate_get_all_vocabularies() {
   $vocabularies = array();
   $results = db_query("SELECT vid, name FROM {taxonomy_vocabulary} ORDER BY weight ASC");
   foreach ($results as $result) {
-    $vocabularies[$result->vid] = t('@vocabulary (VID: @vid)', array('@vocabulary' => $result->name, '@vid' => $result->vid));
+    $vocabularies[$result->vid] = t('@vocabulary (ID: @vid)', array('@vocabulary' => $result->name, '@vid' => $result->vid));
   }
 
   return $vocabularies;
