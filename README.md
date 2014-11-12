@@ -37,7 +37,7 @@ Most bigger websites will have a main custom module, with general system modific
 
 ### Why this module isn't on Drupal.org?
 
-This module does nothing on its own. It is opinionated and might not be suitable for anyone. However, if there is enough interest, it can be turned into a full module, hosted on Drupal.org.
+This module does nothing on its own. It is opinionated and might not be suitable for everyone. However, if there is enough interest, it can be turned into a full module, hosted on Drupal.org.
 
 <hr>
 
