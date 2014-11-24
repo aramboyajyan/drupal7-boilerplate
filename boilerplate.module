@@ -324,7 +324,7 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
       break;
 
     // User reset password form.
-    case 'user_pass':
+    case 'user-pass':
       break;
 
     // Site contact form.
