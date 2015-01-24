@@ -199,7 +199,11 @@ function boilerplate_block_configure($delta = '') {
   $form = array();
   switch ($delta) {
     case 'sample':
-      $form['boilerplate_block_count'] = array(
+      $form['boilerplate'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Custom block settings'),
+      );
+      $form['boilerplate']['boilerplate_block_count'] = array(
         '#type' => 'select',
         '#title' => t('Sample counting'),
         '#default_value' => variable_get('boilerplate_block_count', 10),
