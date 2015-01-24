@@ -722,6 +722,27 @@ function _boilerplate_trim_string_with_ellipsis($string, $length) {
 }
 
 /**
+ * Helper function - check if a user exists by username or email.
+ */
+function _boilerplate_check_if_user_exists($identifier) {
+  $query = db_select('users', 'u')
+    ->fields('u', array('uid'));
+
+  if (valid_email_address($identifier)) {
+    $query->condition('mail', $identifier);
+  }
+  else {
+    $query->condition('name', $identifier);
+  }
+
+  $result = $query
+    ->execute()
+    ->fetchField();
+
+  return (bool) $result;
+}
+
+/**
  * Modify the Drupal mail system to send HTML emails.
  *
  * In order to send HTML email instead of default, plain text emails, we have to
