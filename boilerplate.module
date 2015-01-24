@@ -580,7 +580,7 @@ function _boilerplate_get_image_styles() {
   $styles = array();
   $results = image_styles();
   foreach ($results as $result) {
-    $styles[$result['name']] = $result['name'];
+    $styles[$item['name']] = $item['label'];
   }
 
   return $styles;
