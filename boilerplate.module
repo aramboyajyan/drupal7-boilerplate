@@ -677,6 +677,23 @@ function _boilerplate_get_all_node_types() {
 }
 
 /**
+ * Helper function - get the list of all fields. For use in administrative
+ * forms.
+ */
+function _boilerplate_get_all_fields() {
+  $fields = array();
+  // We only need field names; it's way easier and faster to query the database
+  // directly, than to invoke field_info_fields() and get all extra information
+  // we don't need at all.
+  $results = db_query("SELECT field_name FROM {field_config} ORDER BY field_name ASC");
+  foreach ($results as $result) {
+    $fields[$result->field_name] = $result->field_name;
+  }
+
+  return $fields;
+}
+
+/**
  * Helper function - get the list of all vocabularies. For use in administrative
  * forms.
  */
