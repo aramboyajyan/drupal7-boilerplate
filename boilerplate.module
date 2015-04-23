@@ -123,11 +123,14 @@ function boilerplate_menu() {
  */
 function boilerplate_admin_paths() {
   return array(
-    // This is just a sample page that shows how to declare administrative
-    // paths.
-    'arguments/*' => TRUE,
     // Use administrative theme when editing panel nodes.
     'node/*/panel_layout' => TRUE
+    // Use administrative theme when editing, deleting or checking out the dev
+    // output of comments. Otherwise, the front-end theme will be used, and that
+    // is usually not suited for administration.
+    'comment/*/edit' => TRUE,
+    'comment/*/delete' => TRUE,
+    'comment/*/devel' => TRUE,
   );
 }
 
