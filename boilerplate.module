@@ -11,8 +11,11 @@
 /**
  * Constant variables.
  */
-// Sample constant variable placeholder.
-define('BOILERPLATE_PLACEHOLDER', 'value');
+// Disable all emails sent by the website. Use only during the development.
+define('BOILERPLATE_DISABLE_EMAILS', TRUE);
+// "Development" environment. Use only to provide additional debugging or
+// developer information (e.g. hidden fields, dpm() output, etc.).
+define('BOILERPLATE_ENV_DEV', TRUE);
 
 /**
  * Preload certain files whose functions we need at all times.
@@ -485,6 +488,16 @@ function boilerplate_skinr_api_2() {
   return array(
     'directory' => 'skins',
   );
+}
+
+/**
+ * Implements hook_mail_alter
+ */
+function boilerplate_mail_alter(&$message) {
+  if (BOILERPLATE_DISABLE_EMAILS) {
+    // Set 'To' field to nothing, so Drupal won't have any address.
+    $message['to'] = '';
+  }
 }
 
 /**
