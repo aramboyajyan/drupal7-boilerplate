@@ -20,7 +20,7 @@ define('BOILERPLATE_ENV_DEV', TRUE);
 /**
  * Preload certain files whose functions we need at all times.
  */
-module_load_include('inc', 'boilerplate', 'boilerplate.helpers');
+require_once dirname(__FILE__) . '/boilerplate.helpers.inc';
 
 /**
  * Implements hook_help().
