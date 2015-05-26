@@ -122,6 +122,14 @@ function boilerplate_menu() {
 }
 
 /**
+ * Implements hook_menu_alter().
+ */
+function boilerplate_menu_alter(&$items) {
+  // Block the access to the /node page.
+  $items['node']['access callback'] = FALSE;
+}
+
+/**
  * Implements hook_admin_paths().
  */
 function boilerplate_admin_paths() {
