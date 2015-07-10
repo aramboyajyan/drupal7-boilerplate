@@ -362,6 +362,12 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
    */
   switch ($form_id) {
 
+    // Site settings form.
+    case 'system_site_information_settings':
+      // Hide the "Front page" fieldset if it will not be used.
+      $form['front_page']['#access'] = FALSE;
+      break;
+
     // Node type form.
     case 'node_type_form':
       // Automatically check the "Revisioning" checkbox for all new content
