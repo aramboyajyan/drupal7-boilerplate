@@ -136,7 +136,7 @@ function boilerplate_menu_alter(&$items) {
 function boilerplate_admin_paths() {
   return array(
     // Use administrative theme when editing panel nodes.
-    'node/*/panel_layout' => TRUE
+    'node/*/panel_layout' => TRUE,
     // Use administrative theme when editing, deleting or checking out the dev
     // output of comments. Otherwise, the front-end theme will be used, and that
     // is usually not suited for administration.
