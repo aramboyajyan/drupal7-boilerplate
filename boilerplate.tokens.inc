@@ -12,6 +12,11 @@
  * Implements hook_token_info().
  */
 function boilerplate_token_info() {
+  // Real username, not formatted user's name.
+  $info['tokens']['user']['username'] = array(
+    'name' => t('Real username'),
+    'description' => t('Real username.'),
+  );
   // Define our token type.
   $types['boilerplate-test'] = array(
     'name' => t('Boilerplate'),
@@ -41,6 +46,18 @@ function boilerplate_token_info() {
 function boilerplate_tokens($type, $tokens, array $data = array(), array $options = array()) {
   $replacements = array();
   switch ($type) {
+    // Username replacements.
+    case 'user':
+    case 'account':
+    case 'current-user':
+      foreach ($tokens as $name => $original) {
+        switch ($name) {
+          case 'username':
+            $replacements[$original] = $data['user']->name;
+            break;
+        }
+      }
+      break;
     // Our sample group.
     case 'boilerplate-test':
       foreach ($tokens as $name => $original) {
