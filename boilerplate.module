@@ -431,6 +431,14 @@ function boilerplate_theme($existing, $type, $theme, $path) {
  * Implements hook_page_alter().
  */
 function boilerplate_page_alter(&$page) {
+  // Add our custom CSS only on admin paths.
+  //
+  // Ideally, each website will have a child theme that is based on the contrib
+  // admin theme used on the site, but this might be an overkill in cases when
+  // only minor modifications are needed.
+  if (path_is_admin(current_path())) {
+    drupal_add_css(drupal_get_path('module', 'boilerplate') . '/css/admin.modifications.css');
+  }
 
   // Add custom setting accessible in JS through
   // Drupal.settings.boilerplate.sampleVar.
