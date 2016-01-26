@@ -478,6 +478,39 @@ function boilerplate_mail($key, &$message, $params) {
 }
 
 /**
+ * Implements hook_username_alter().
+ */
+function boilerplate_username_alter(&$name, $account) {
+  // Before using this hook, it is important to understand what does this
+  // implementation do, and how does it affect other parts of the site.
+  //
+  // Most obvious benefit of altering the way names of users are displayed on
+  // the site is to include custom fields, or profile information (e.g. if you
+  // are using the Profile2 module).
+  //
+  // However, changing the usernames here will affect the tokens as well. This
+  // means that registration emails for example will not include the real
+  // username of the user, but will instead display {first name} {last name}, or
+  // whatever else you set it to.
+  //
+  // This is not intuitive and is not clearly documented. What I suggest to
+  // remedy this, is to create another token for displaying the real username.
+  // The only downside of this, is that you will have to manually update all
+  // places where you want usernames to be displayed instead of formatted names.
+  //
+  // Finally, the implementation below is just as an example.
+  if (
+    isset($account->field_first_name[LANGUAGE_NONE][0]['value']) &&
+    isset($account->field_last_name[LANGUAGE_NONE][0]['value'])
+  ) {
+    $name = t('@first_name @last_name', array(
+      '@first_name' => $account->field_first_name[LANGUAGE_NONE][0]['value'],
+      '@last_name'  => $account->field_last_name[LANGUAGE_NONE][0]['value'],
+    ));
+  }
+}
+
+/**
  * Implements of hook_user_view().
  *
  * Adds a custom element to the user view page.
