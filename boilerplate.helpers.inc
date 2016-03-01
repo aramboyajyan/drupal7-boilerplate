@@ -242,3 +242,14 @@ function _boilerplate_get_user_picture_or_default($account, $preset) {
 
   return image_style_url($preset, $uri);
 }
+
+/**
+ * Helper function - get aliased argument.
+ */
+function _boilerplate_get_aliased_arg($key = 0) {
+  $items = explode('/', current_path());
+
+  if (isset($items[$key])) return $items[$key];
+
+  return FALSE;
+}
