@@ -218,3 +218,27 @@ function _boilerplate_check_if_user_exists($identifier) {
 
   return (bool) $result;
 }
+
+/**
+ * Helper function - get default avatar public path.
+ */
+function _boilerplate_get_default_avatar_public_path() {
+  return 'public://' . strtr(variable_get('user_picture_default'), array(
+    variable_get('file_public_path', 'sites/default/files') . '/' => '',
+  ));
+}
+
+/**
+ * Helper function - get the user picture URI or get the one from default
+ * picture.
+ */
+function _boilerplate_get_user_picture_or_default($account, $preset) {
+  if (isset($account->picture->uri)) {
+    $uri = $account->picture->uri;
+  }
+  else {
+    $uri = _boilerplate_get_default_avatar_public_path();
+  }
+
+  return image_style_url($preset, $uri);
+}
