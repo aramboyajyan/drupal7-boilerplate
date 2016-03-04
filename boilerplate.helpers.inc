@@ -253,3 +253,11 @@ function _boilerplate_get_aliased_arg($key = 0) {
 
   return FALSE;
 }
+
+/**
+ * Helper function - clear views cache.
+ */
+function _boilerplate_clear_views_cache($view_name) {
+  cache_clear_all('ctools_export:views_view:' . $view_name, 'cache_views', TRUE);
+  cache_clear_all($view_name, 'cache_views_data', TRUE);
+}
