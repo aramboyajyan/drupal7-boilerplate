@@ -31,6 +31,27 @@ function boilerplate_rules_event_info() {
 }
 
 /**
+ * Implements hook_rules_condition_info().
+ */
+function boilerplate_rules_condition_info() {
+  return array(
+    'boilerplate_rules_sample_condition' => array(
+      'label' => t('Sample condition'), 
+      'parameter' => array(
+        'node1' => array(
+          'label' => t('First node parameter'),
+          'type' => 'node',
+        ), 
+        'node2' => array(
+          'label' => t('Second node parameter'),
+          'type' => 'node',
+        ), 
+      ), 
+      'group' => t('Custom'),
+    ),
+  );
+}
+/**
  * Implements hook_rules_action_info().
  */
 function boilerplate_rules_action_info() {
@@ -55,4 +76,11 @@ function boilerplate_log_user_in($account) {
   global $user;
   $user = user_load($account->uid);
   user_login_finalize();
+}
+
+/**
+ * Rules condition callback to perform a sample check.
+ */
+function boilerplate_rules_sample_condition($node1, $node2) {
+  return $node1->nid == $node2->nid;
 }
