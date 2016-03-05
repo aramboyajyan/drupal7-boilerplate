@@ -35,7 +35,7 @@ function boilerplate_rules_event_info() {
  */
 function boilerplate_rules_condition_info() {
   return array(
-    'boilerplate_rules_sample_condition' => array(
+    'boilerplate_rules_condition_compare_nids' => array(
       'label' => t('Sample condition'), 
       'parameter' => array(
         'node1' => array(
@@ -81,6 +81,6 @@ function boilerplate_rules_action_log_user_in($account) {
 /**
  * Rules condition callback to perform a sample check.
  */
-function boilerplate_rules_sample_condition($node1, $node2) {
+function boilerplate_rules_condition_compare_nids($node1, $node2) {
   return $node1->nid == $node2->nid;
 }
