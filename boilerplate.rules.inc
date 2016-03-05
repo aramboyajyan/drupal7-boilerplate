@@ -56,7 +56,7 @@ function boilerplate_rules_condition_info() {
  */
 function boilerplate_rules_action_info() {
   return array(
-    'boilerplate_log_user_in' => array(
+    'boilerplate_rules_action_log_user_in' => array(
       'label' => t('Log in a user'),
       'group' => t('Custom'),
       'parameter' => array(
@@ -72,7 +72,7 @@ function boilerplate_rules_action_info() {
 /**
  * Rules action callback to login the user provided in the function parameter.
  */
-function boilerplate_log_user_in($account) {
+function boilerplate_rules_action_log_user_in($account) {
   global $user;
   $user = user_load($account->uid);
   user_login_finalize();
