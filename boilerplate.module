@@ -586,7 +586,7 @@ function boilerplate_sample_send_email() {
     flood_register_event('boilerplate_sample_send_email', 60 * 60);
 
     // Invoke our custom event.
-    rules_invoke_event('boilerplate_email_is_sent', $account);
+    rules_invoke_event('boilerplate_rules_event_email_is_sent', $account);
 
     // Register this event in the log.
     watchdog('mail', '%sender-name (@sender-from) sent an e-mail.', array(

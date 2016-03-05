@@ -15,7 +15,7 @@
  */
 function boilerplate_rules_event_info() {
   return array(
-    'boilerplate_email_is_sent' => array(
+    'boilerplate_rules_event_email_is_sent' => array(
       'label' => t('Boilerplate email is sent'),
       'help' => t('Triggers when an email is sent using custom function.'),
       'group' => t('Custom'),
