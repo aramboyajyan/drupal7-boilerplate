@@ -51,6 +51,7 @@ function boilerplate_rules_condition_info() {
     ),
   );
 }
+
 /**
  * Implements hook_rules_action_info().
  */
