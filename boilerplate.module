@@ -322,42 +322,6 @@ function boilerplate_preprocess_block(&$vars) {
 function boilerplate_form_alter(&$form, &$form_state, $form_id) {
 
   /**
-   * General overrides.
-   */
-  switch ($form['#id']) {
-
-    // Node comment form.
-    case 'comment-form':
-      // Remove the "Your name" field; unnecessary if the site is using Ultima.
-      unset($form['author']['_author']);
-      // Redirect back to the node form if there is a validation error on form
-      // submission. This is to avoid having separate page where the comment is
-      // displayed right under the node.
-      $form['#action'] = url('node/' . $form['#node']->nid);
-      break;
-
-    // User login form.
-    case 'user-login':
-      // Remove default descriptions.
-      unset($form['name']['#description']);
-      unset($form['pass']['#description']);
-      break;
-
-    // User registration form.
-    case 'user-register-form':
-      break;
-
-    // User reset password form.
-    case 'user-pass':
-      break;
-
-    // Site contact form.
-    case 'contact-site-form':
-      break;
-
-  }
-
-  /**
    * Specific overrides.
    */
   switch ($form_id) {
@@ -393,6 +357,12 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
 
     // Example override for node comment form.
     case 'comment_node_type_form':
+      // Remove the "Your name" field; unnecessary if the site is using Ultima.
+      unset($form['author']['_author']);
+      // Redirect back to the node form if there is a validation error on form
+      // submission. This is to avoid having separate page where the comment is
+      // displayed right under the node.
+      $form['#action'] = url('node/' . $form['#node']->nid);
       break;
 
     // Sample webform custom validation.
@@ -401,7 +371,22 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
       $first = array_shift($form['#submit']);
       array_unshift($form['#submit'], $first, '_boilerplate_validate_webform');
       break;
+
+    // User login form.
+    case 'user_login':
+      // Remove default descriptions.
+      unset($form['name']['#description']);
+      unset($form['pass']['#description']);
+      break;
       
+    // User login form.
+    case 'user_register_form':
+      break;
+      
+    // Reset password form.
+    case 'user_pass':
+      break;
+
     // User edit page.
     case 'user_profile_form':
       break;
