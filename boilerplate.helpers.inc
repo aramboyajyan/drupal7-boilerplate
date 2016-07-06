@@ -183,7 +183,7 @@ function _boilerplate_secure_compare($a, $b) {
  * Helper function - check if the current request is an AJAX request.
  */
 function _boilerplate_is_ajax_request() {
-  return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+  return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && drupal_strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 }
 
 /**
@@ -204,7 +204,7 @@ function _boilerplate_check_if_user_exists($identifier) {
   $query = db_select('users', 'u')
     ->fields('u', array('uid'));
 
-  $identifier = strtolower($identifier);
+  $identifier = drupal_strtolower($identifier);
   if (valid_email_address($identifier)) {
     $query->condition('mail', $identifier);
   }
