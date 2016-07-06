@@ -191,7 +191,7 @@ function _boilerplate_is_ajax_request() {
  */
 function _boilerplate_trim_string_with_ellipsis($string, $length) {
   if (strlen($string) > $length) {
-    $string = substr($string, 0, $length) . '&hellip;';
+    $string = drupal_substr($string, 0, $length) . '&hellip;';
   }
 
   return $string;
