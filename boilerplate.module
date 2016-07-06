@@ -418,6 +418,8 @@ function boilerplate_theme($existing, $type, $theme, $path) {
  * Implements hook_page_alter().
  */
 function boilerplate_page_alter(&$page) {
+  global $language;
+
   // Add our custom CSS only on admin paths.
   //
   // Ideally, each website will have a child theme that is based on the contrib
@@ -427,9 +429,17 @@ function boilerplate_page_alter(&$page) {
     drupal_add_css(drupal_get_path('module', 'boilerplate') . '/css/admin.modifications.css');
   }
 
-  // Add custom setting accessible in JS through
-  // Drupal.settings.boilerplate.sampleVar.
-  drupal_add_js(array('boilerplate' => array('sampleVar' => t('Custom value'))), array('type' => 'setting'));
+  // Add custom setting accessible in JS through Drupal.settings.boilerplate.var.
+  // Language added below is accessible the following way:
+  //      Drupal.settings.boilerplate.language
+  drupal_add_js(array(
+      'boilerplate' => array(
+        'sampleVar' => t('Custom value')
+        'language' => $language->language,
+      ),
+    ),
+    array('type' => 'setting')
+  );
 
   // Add content to the end of the page.
   $page['page_bottom']['boilerplate'] = array(
