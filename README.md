@@ -3,6 +3,8 @@
 Full featured custom module boilerplate with already setup structure and default functionality.  
 The module and all example code is built completely using Drupal best practices and standards.
 
+See the version for Drupal 8 [here](https://github.com/aramboyajyan/drupal8-boilerplate).
+
 ### Includes
 
 - Custom forms, validation and submit handlers
