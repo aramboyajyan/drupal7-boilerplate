@@ -11,10 +11,14 @@
 /**
  * Sample form.
  */
-function boilerplate_sample_form() {
+function boilerplate_sample_form($form, &$form_state, $arg1, $arg2) {
   $form['sample'] = array(
     '#type' => 'fieldset',
     '#title' => t('Personal information'),
+    '#description' => t('Passed arguments: %arg1 and %arg2.', array(
+      '%arg1' => $arg1,
+      '%arg2' => $arg2,
+    )),
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
