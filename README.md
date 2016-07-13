@@ -37,6 +37,18 @@ See the version for Drupal 8 [here](https://github.com/aramboyajyan/drupal8-boil
 
 Most bigger websites will have a main custom module, with general system modifications or general features and additional custom modules focused on a particular functionality. This boilerplate is suitable for creating that *main* module.
 
+### How to use
+
+Few different ways:
+
+1. Copy/paste the parts you need in your custom module.
+2. Clone the whole repo and make the following replacements:
+    - Rename all `boilerplate.` files to `YOUR_MODULE.`.
+    - Replace all `boilerplate` (lowercase) words with `YOUR_MODULE` (lowercase as well).
+    - Replace all `BOILERPLATE` (uppercase) words with `YOUR_MODULE` (uppercase as well).
+    - Replace all `Boilerplate` (capitalized) words with `YOUR_MODULE` (capitalized as well).
+    - Customize the code to fit your project.
+
 ### Why this module isn't on Drupal.org?
 
 This module does nothing on its own. It is opinionated and might not be suitable for everyone. However, if there is enough interest, it can be turned into a full module, hosted on Drupal.org.
