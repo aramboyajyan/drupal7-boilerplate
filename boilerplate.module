@@ -62,7 +62,7 @@ function boilerplate_menu() {
   $items['boilerplate/form'] = array(
     'title' => 'Sample form',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('boilerplate_sample_form'),
+    'page arguments' => array('boilerplate_sample_form', 'arg1', 'arg2'),
     'access arguments' => array('administer site configuration'),
     'type' => MENU_CALLBACK,
     'file' => 'boilerplate.forms.inc',
