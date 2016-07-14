@@ -583,6 +583,8 @@ function boilerplate_requirements($phase) {
           'title' => t('Dev module name'),
           'value' => $module_name,
           'description' => t('Module name was not changed. Consider renaming the module. This is coming from the hook_requirements() implementation in %module file.', array(
+            '%module' => drupal_get_path('module', $module_name) . '/' . $module_name . '.module',
+          )),
           'severity' => REQUIREMENT_WARNING,
         );
       }
