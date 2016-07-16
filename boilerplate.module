@@ -434,7 +434,7 @@ function boilerplate_page_alter(&$page) {
   //      Drupal.settings.boilerplate.language
   drupal_add_js(array(
       'boilerplate' => array(
-        'sampleVar' => t('Custom value')
+        'sampleVar' => t('Custom value'),
         'language' => $language->language,
       ),
     ),
