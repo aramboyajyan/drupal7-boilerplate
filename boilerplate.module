@@ -247,6 +247,30 @@ function boilerplate_block_save($delta = '', $edit = array()) {
 }
 
 /**
+ * Implements hook_entity_insert().
+ */
+function boilerplate_entity_insert($entity, $type) {
+  // Register our shutdown function that will provide post-action hooks for
+  // other modules. This functionality is inspired by the hook_post_action
+  // module.
+  drupal_register_shutdown_function('_boilerplate_post_save', $entity, $type, 'insert');
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function boilerplate_entity_update($entity, $type) {
+  drupal_register_shutdown_function('_boilerplate_post_save', $entity, $type, 'update');
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function boilerplate_entity_delete($entity, $type) {
+  drupal_register_shutdown_function('_boilerplate_post_save', $entity, $type, 'delete');
+}
+
+/**
  * Implements hook_preprocess_page().
  */
 function boilerplate_preprocess_page(&$vars) {
@@ -679,6 +703,38 @@ function _boilerplate_validate_webform($form) {
       if ($element['value'] != 'Sample value') {
         form_set_error('', t('Validation message.'));
       }
+    }
+  }
+}
+
+/**
+ * Post save action callback.
+ *
+ * @see boilerplate_entity_insert()
+ * @see boilerplate_entity_update()
+ * @see boilerplate_entity_delete()
+ */
+function _boilerplate_post_save($entity, $type, $op) {
+  $entity_is_saved = FALSE;
+  $new_entity = NULL;
+
+  if ($op == 'insert' || $op == 'update') {
+    $entity_is_saved = TRUE;
+  }
+  if ($op == 'delete') {
+    list($id) = entity_extract_ids($type, $entity);
+    $new_entity = entity_load($type, array($id));
+    if (!$new_entity) {
+      $entity_is_saved = TRUE;
+    }
+  }
+  if ($entity_is_saved) {
+    module_invoke_all('entity_post' . $op, $entity, $type);
+    module_invoke_all('entity_postsave', $entity, $type, $op);
+
+    if ($type == 'node') {
+      module_invoke_all('node_post' . $op, $entity);
+      module_invoke_all('node_postsave', $entity, $op);
     }
   }
 }
