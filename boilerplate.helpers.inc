@@ -54,7 +54,7 @@ function _boilerplate_get_all_users($status = 1, $rids = NULL) {
   }
   $results = $query->execute();
   foreach ($results as $result) {
-    $users[$result->uid] = t('@name (ID: @uid)', array('@name' => $result->name, '@uid' => $result->uid));
+    $users[$result->uid] = t('@user_name (ID: @user_id)', array('@user_name' => $result->name, '@user_id' => $result->uid));
   }
 
   return $users;
@@ -68,7 +68,7 @@ function _boilerplate_get_roles() {
   $roles = array();
   $results = db_query("SELECT rid, name FROM {role} ORDER BY weight ASC");
   foreach ($results as $result) {
-    $roles[$result->rid] = t('@name (ID: @rid)', array('@name' => ucfirst($result->name), '@rid' => $result->rid));
+    $roles[$result->rid] = t('@role_name (ID: @role_id)', array('@role_name' => ucfirst($result->name), '@role_id' => $result->rid));
   }
 
   return $roles;
@@ -92,7 +92,7 @@ function _boilerplate_get_all_nodes($type = NULL, $status = NODE_PUBLISHED) {
     ->fetchAll();
   $nodes = array();
   foreach ($results as $result) {
-    $nodes[$result->nid] = t('@title (ID: @nid)', array('@title' => $result->title, '@nid' => $result->nid));
+    $nodes[$result->nid] = t('@node_title (ID: @node_id)', array('@node_title' => $result->title, '@node_id' => $result->nid));
   }
 
   return $nodes;
@@ -106,7 +106,7 @@ function _boilerplate_get_all_node_types() {
   $types = array();
   $results = db_query("SELECT type, name FROM {node_type} ORDER BY name");
   foreach ($results as $result) {
-    $types[$result->type] = t('@name (machine name: @machine_name)', array('@name' => $result->name, '@machine_name' => $result->type));
+    $types[$result->type] = t('@content_type_label (machine name: @machine_name)', array('@content_type_label' => $result->name, '@machine_name' => $result->type));
   }
 
   return $types;
@@ -137,7 +137,7 @@ function _boilerplate_get_all_vocabularies() {
   $vocabularies = array();
   $results = db_query("SELECT vid, name FROM {taxonomy_vocabulary} ORDER BY weight ASC");
   foreach ($results as $result) {
-    $vocabularies[$result->vid] = t('@vocabulary (ID: @vid)', array('@vocabulary' => $result->name, '@vid' => $result->vid));
+    $vocabularies[$result->vid] = t('@vocabulary (ID: @vocabulary_id)', array('@vocabulary' => $result->name, '@vocabulary_id' => $result->vid));
   }
 
   return $vocabularies;
