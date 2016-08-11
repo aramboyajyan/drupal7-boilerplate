@@ -52,6 +52,21 @@ function boilerplate_help($path, $arg) {
  * Implements hook_menu().
  */
 function boilerplate_menu() {
+  $items = array();
+
+  // Add a simple redirection from /login to /user/login. This came as a request
+  // quite a few times from editors and other non-technical users for which the
+  // /user/login path was somewhat harder to remember. Not all links show the
+  // login link, so administrators / editors go to the login page directly via
+  // bookmark or just by typing the URL in the addressbar. This redirect will
+  // make it easier for them to end up on the login page.
+  $items['login'] = array(
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('user/login'),
+    'access callback' => 'user_is_anonymous',
+  );
+
+  // Sample menu callbacks.
   $items['boilerplate'] = array(
     'page callback' => 'boilerplate_sample_page_callback',
     'page arguments' => array(),
