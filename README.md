@@ -49,9 +49,60 @@ Few different ways:
     - Replace all `Boilerplate` (capitalized) words with `YOUR_MODULE` (capitalized as well).
     - Customize the code to fit your project.
 
-### Why this module isn't on Drupal.org?
+### Removing components
 
-This module does nothing on its own. It is opinionated and might not be suitable for everyone. However, if there is enough interest, it can be turned into a full module, hosted on Drupal.org.
+Not all projects will need every component that is included in this module. Below are instructions on how to remove those parts. If you want to do this after you have installed the module, don't forget to clear all caches after removing the components.
+
+##### Sample pages
+
+- open `boilerplate.module` file and remove the `boilerplate_menu()` function
+- open `boilerplate.info` file and remove the following line: `configure = admin/config/boilerplate/settings`
+- remove or empty the `boilerplate.forms.inc` file
+- remove or empty the `boilerplate.pages.inc` file
+- remove or empty the `boilerplate.admin.inc` file
+- remove or empty the `boilerplate.batch.inc` file
+
+##### Themable elements
+
+- open `boilerplate.module` and remove the `boilerplate_theme()` function
+- remove the `/theme` directory
+
+##### Custom mailsystem
+
+- open `boilerplate.module` file and remove the following line: `require_once dirname(__FILE__) . '/boilerplate.mailsystem.inc';`
+- remove the `boilerplate.mailsystem.inc` file
+
+##### Helper functions
+
+- open `boilerplate.module` file and remove the following line: `require_once dirname(__FILE__) . '/boilerplate.helpers.inc';`
+- remove the `boilerplate.helpers.inc` file
+
+##### Tests
+
+- open `boilerplate.info` file and remove the following line: `files[] = boilerplate.test`
+- remove the `boilerplate.test` file
+
+##### Views integration
+
+- open `boilerplate.module` file and remove the `boilerplate_views_api()` function
+- remove the `/views` directory
+
+##### Token integration
+
+- remove the `boilerplate.tokens.inc` file
+
+##### Rules integration
+
+- remove the `boilerplate.rules.inc` file
+
+##### Drush integration
+
+- remove the `/drush` directory
+
+##### Skinr integration
+
+- open `boilerplate.module` and remove the `boilerplate_skinr_api_2()` function
+- remove the `/skins` directory
 
 <hr>
 
