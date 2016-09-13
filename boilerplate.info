@@ -11,6 +11,7 @@ description = Custom module boilerplate with most used hooks and functions. Crea
 package = Custom
 core = 7.x
 version = 7.x-1.0
+project = boilerplate
 
 ; ------------------------------------------------------------------------------
 ; Scripts
@@ -30,7 +31,7 @@ files[] = boilerplate.test
 ; ------------------------------------------------------------------------------
 ; Dependencies
 ; ------------------------------------------------------------------------------
-; dependencies[] = 
+; dependencies[] =
 
 ; ------------------------------------------------------------------------------
 ; Other
