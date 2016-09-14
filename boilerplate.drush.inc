@@ -42,7 +42,7 @@ function boilerplate_drush_help($section) {
 }
 
 /**
- * Command to download the Chosen plugin.
+ * Callback for the boilerplate-hello command.
  */
 function boilerplate_hello_command() {
   $args = func_get_args();
