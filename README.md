@@ -1,6 +1,6 @@
 # [Drupal 7](http://drupal.org) custom module boilerplate
 
-Full featured custom module boilerplate with already setup structure and default functionality.  
+Full featured custom module boilerplate with already setup structure and default functionality.
 The module and all example code is built completely using Drupal best practices and standards.
 
 See the version for Drupal 8 [here](https://github.com/aramboyajyan/drupal8-boilerplate).
@@ -97,7 +97,7 @@ Not all projects will need every component that is included in this module. Belo
 
 ##### Drush integration
 
-- remove the `/drush` directory
+- remove the `boilerplate.drush.inc` file
 
 ##### Skinr integration
 
