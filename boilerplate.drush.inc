@@ -60,6 +60,7 @@ function boilerplate_hello_command() {
  * Command argument complete callback.
  *
  * Provides argument values for shell completion.
+ * To make this works read https://github.com/drush-ops/drush/blob/master/drush.complete.sh
  *
  * @return array
  *   Array of popular fillings.
