@@ -133,7 +133,7 @@ function boilerplate_menu() {
     'file' => 'boilerplate.pages.inc',
     'weight' => 100,
   );
-  
+
   return $items;
 }
 
@@ -207,7 +207,7 @@ function boilerplate_cron() {
 function boilerplate_block_info() {
   $blocks['sample']['info'] = t('Sample block');
   $blocks['sample']['properties']['administrative'] = TRUE;
-  
+
   return $blocks;
 }
 
@@ -290,8 +290,6 @@ function boilerplate_entity_delete($entity, $type) {
  */
 function boilerplate_preprocess_page(&$vars) {
 
-  // 
-
 }
 
 /**
@@ -303,7 +301,7 @@ function boilerplate_preprocess_node(&$vars) {
    * Per content type preprocessing.
    */
   switch ($vars['node']->type) {
-    
+
     // Pages.
     case 'page':
       break;
@@ -352,8 +350,6 @@ function boilerplate_preprocess_field(&$vars) {
  */
 function boilerplate_preprocess_block(&$vars) {
 
-  // 
-
 }
 
 /**
@@ -384,8 +380,8 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
 
     // Panels edit form.
     case 'panels_edit_display_form':
-      // Remove "Live preview"
-      $form['preview']['#access'] = false;
+      // Remove "Live preview".
+      $form['preview']['#access'] = FALSE;
       break;
 
     // Taxonomy term and vocabulary forms.
@@ -418,11 +414,11 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
       unset($form['name']['#description']);
       unset($form['pass']['#description']);
       break;
-      
+
     // User login form.
     case 'user_register_form':
       break;
-      
+
     // Reset password form.
     case 'user_pass':
       break;
@@ -430,7 +426,7 @@ function boilerplate_form_alter(&$form, &$form_state, $form_id) {
     // User edit page.
     case 'user_profile_form':
       break;
-      
+
   }
 
 }
@@ -442,7 +438,7 @@ function boilerplate_theme($existing, $type, $theme, $path) {
   // Get the path to this module and define theme dir.
   $module_path = drupal_get_path('module', 'boilerplate');
   $theme_dir   = $module_path . '/theme';
-  
+
   // Themable elements.
   return array(
     'sample-template' => array(
@@ -470,13 +466,13 @@ function boilerplate_page_alter(&$page) {
 
   // Add custom setting accessible in JS through Drupal.settings.boilerplate.var.
   // Language added below is accessible the following way:
-  //      Drupal.settings.boilerplate.language
+  //      Drupal.settings.boilerplate.language.
   drupal_add_js(array(
-      'boilerplate' => array(
-        'sampleVar' => t('Custom value'),
-        'language' => $language->language,
-      ),
+    'boilerplate' => array(
+      'sampleVar' => t('Custom value'),
+      'language' => $language->language,
     ),
+  ),
     array('type' => 'setting')
   );
 
@@ -561,7 +557,7 @@ function boilerplate_user_view($account, $view_mode, $langcode) {
 
 /**
  * Implements hook_webform_select_options_info().
- * 
+ *
  * Defines a custom dropdown form element to be used with the Webform module.
  */
 function boilerplate_webform_select_options_info() {
@@ -569,7 +565,7 @@ function boilerplate_webform_select_options_info() {
     'title' => t('List of published nodes'),
     'options callback' => '_boilerplate_get_all_nodes',
   );
-  
+
   return $items;
 }
 
@@ -583,7 +579,7 @@ function boilerplate_skinr_api_2() {
 }
 
 /**
- * Implements hook_mail_alter
+ * Implements hook_mail_alter.
  */
 function boilerplate_mail_alter(&$message) {
   if (BOILERPLATE_DISABLE_EMAILS) {
@@ -626,7 +622,7 @@ function boilerplate_sample_send_email() {
     // Register this event in the log.
     watchdog('mail', '%sender-name (@sender-from) sent an e-mail.', array(
       '%sender-name' => $values['name'],
-      '@sender-from' => $account->mail
+      '@sender-from' => $account->mail,
     ));
   }
 }
@@ -635,10 +631,10 @@ function boilerplate_sample_send_email() {
  * Sample function - caching usage.
  */
 function boilerplate_sample_cached_data($reset = FALSE) {
-  
-  // Save data in a static variable for consecutive calls
+
+  // Save data in a static variable for consecutive calls.
   static $data;
-  
+
   // If data is not set or reset is requested, regenerate.
   if (!isset($data) || $reset) {
     if (!$reset && ($cache = cache_get('boilerplate_sample_data')) && !empty($cache->data)) {
@@ -654,7 +650,7 @@ function boilerplate_sample_cached_data($reset = FALSE) {
       cache_set('boilerplate_sample_data', serialize($data), 'cache', REQUEST_TIME + 1 * 24 * 60 * 60);
     }
   }
-  
+
   return $data;
 }
 

@@ -24,5 +24,4 @@ MODULE PATCHES
 SPECIFICS OF THE INSTALLATION
 *****************************
 
-- 
-
+-

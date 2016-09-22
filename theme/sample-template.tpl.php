@@ -1,4 +1,9 @@
-<?php if (isset($argument)): ?>
+<?php
+
+/**
+ * @file
+ */
+if (isset($argument)): ?>
   <h1><?php print $argument; ?></h1>
 <?php endif; ?>
 

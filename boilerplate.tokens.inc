@@ -31,7 +31,7 @@ function boilerplate_token_info() {
     'name' => t('MD5 Time'),
     'description' => t('Generates an MD5 hash of current time.'),
   );
-  
+
   return array(
     'types' => $types,
     'tokens' => array(
@@ -58,6 +58,7 @@ function boilerplate_tokens($type, $tokens, array $data = array(), array $option
         }
       }
       break;
+
     // Our sample group.
     case 'boilerplate-test':
       foreach ($tokens as $name => $original) {
@@ -65,6 +66,7 @@ function boilerplate_tokens($type, $tokens, array $data = array(), array $option
           case 'time':
             $replacements[$original] = REQUEST_TIME;
             break;
+
           case 'md5':
             $replacements[$original] = md5(REQUEST_TIME);
             break;

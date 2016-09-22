@@ -14,13 +14,13 @@
  * In order to send HTML email instead of default, plain text emails, we have to
  * extend Drupal's MainSystemInterface class and provide our own way of
  * formatting the messages.
- * 
+ *
  * When we want to use HTML email parsing instead of the default one, we have to
- * temporarily switch to the HTML, send emails and then switch back to the 
+ * temporarily switch to the HTML, send emails and then switch back to the
  * default plain text parsing.
- * 
+ *
  * Example:
- * 
+ *
  *    variable_set('mail_system', array('default-system' => 'HTMLMailSystem'));
  *    drupal_mail('regular parameters go here');
  *    variable_set('mail_system', array('default-system' => 'DefaultMailSystem'));
