@@ -17,6 +17,14 @@
       });
       */
 
+      // Let's check if the user has AdBlock enabled.
+      if (window.AdBlockNotPresent !== undefined) {
+        console.log('You do not have AdBlock enabled.');
+      }
+      else {
+        console.log('You have AdBlock enabled.');
+      }
+
     }
   };
 })(jQuery);
