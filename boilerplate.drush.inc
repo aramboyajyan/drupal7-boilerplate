@@ -78,3 +78,16 @@ function boilerplate_hello_command() {
     drush_log(dt('Hello there!'), 'success');
   }
 }
+
+/**
+ * Command argument complete callback.
+ *
+ * Provides argument values for shell completion.
+ * To make this works you must execute the first time the command drush init
+ *
+ * @return array
+ *   Array of popular fillings.
+ */
+function boilerplate_boilerplate_hello_complete() {
+  return array('values' => array('everybody', 'friends', 'Ali', 'Amelie'));
+}
