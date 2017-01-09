@@ -11,7 +11,7 @@
 /**
  * Main administrative settings.
  */
-function boilerplate_admin_settings() {
+function boilerplate_admin_settings_form() {
 
   // Note: to make things easier and less confusing, it is the best to name
   // variables using the following pattern:
@@ -22,6 +22,11 @@ function boilerplate_admin_settings() {
   // in certain cases (e.g. editor autocomplete). This can be a real sanity
   // saver in larger projects where there are many big custom modules, each with
   // dozens of custom defined variables.
+
+  // Add custom submit handler for this form, so we can change the status of
+  // uploads.
+  $form['#submit'][] = 'boilerplate_admin_settings_form_submit';
+
   $form['settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Settings fieldset'),
@@ -53,6 +58,26 @@ function boilerplate_admin_settings() {
     '#default_value' => variable_get('boilerplate_var_checkboxes', array(3)),
     '#options' => drupal_map_assoc(array(1, 2, 3, 4, 5)),
   );
+  $form['settings']['boilerplate_var_public_file'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Public file upload'),
+    '#description' => t('Demonstrates how to add a public file upload field.'),
+    '#default_value' => variable_get('boilerplate_var_public_file'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('png gif jpg jpeg'),
+    ),
+    '#upload_location' => 'public://boilerplate-public-images/',
+  );
+  $form['settings']['boilerplate_var_private_file'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Private file upload'),
+    '#description' => t('Demonstrates how to add a private file upload field.'),
+    '#default_value' => variable_get('boilerplate_var_private_file'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('png gif jpg jpeg'),
+    ),
+    '#upload_location' => 'private://boilerplate-private-images/',
+  );
   $form['settings']['boilerplate_var_textarea'] = array(
     '#type' => 'textarea',
     '#title' => t('Textarea field'),
@@ -70,4 +95,31 @@ function boilerplate_admin_settings() {
   );
 
   return system_settings_form($form);
+}
+
+/**
+ * Submit handler for the boilerplate_admin_settings_form() form.
+ */
+function boilerplate_admin_settings_form_submit($form, &$form_state) {
+  global $user;
+
+  if ($form_state['values']['boilerplate_var_public_file'] > 0) {
+    // Change the status of uploaded file, because the system will delete it
+    // otherwise after 6 hours.
+    $public_file = file_load($form_state['values']['boilerplate_var_public_file']);
+    $public_file->status = FILE_STATUS_PERMANENT;
+    file_save($public_file);
+    // Store the relationship to this file to the database.
+    file_usage_add($public_file, 'boilerplate_public_file', 'user', $user->uid);
+  }
+
+  if ($form_state['values']['boilerplate_var_private_file'] > 0) {
+    // Change the status of uploaded file, because the system will delete it
+    // otherwise after 6 hours.
+    $private_file = file_load($form_state['values']['boilerplate_var_private_file']);
+    $private_file->status = FILE_STATUS_PERMANENT;
+    file_save($private_file);
+    // Store the relationship to this file to the database.
+    file_usage_add($private_file, 'boilerplate_private_file', 'user', $user->uid);
+  }
 }

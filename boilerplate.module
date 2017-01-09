@@ -103,7 +103,7 @@ function boilerplate_menu() {
     'title' => 'Sample settings page',
     'description' => 'This is a sample configuration page generated from the Boilerplate module.',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('boilerplate_admin_settings'),
+    'page arguments' => array('boilerplate_admin_settings_form'),
     'access arguments' => array('administer site configuration'),
     'file' => 'boilerplate.admin.inc',
   );
