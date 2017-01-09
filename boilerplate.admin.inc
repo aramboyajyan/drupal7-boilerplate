@@ -11,7 +11,7 @@
 /**
  * Main administrative settings.
  */
-function boilerplate_admin_settings() {
+function boilerplate_admin_settings_form() {
 
   // Note: to make things easier and less confusing, it is the best to name
   // variables using the following pattern:
@@ -25,7 +25,7 @@ function boilerplate_admin_settings() {
 
   // Add custom submit handler for this form, so we can change the status of
   // uploads.
-  $form['#submit'][] = 'boilerplate_admin_settings_submit';
+  $form['#submit'][] = 'boilerplate_admin_settings_form_submit';
 
   $form['settings'] = array(
     '#type' => 'fieldset',
@@ -98,9 +98,9 @@ function boilerplate_admin_settings() {
 }
 
 /**
- * Submit handler for the boilerplate_admin_settings() form.
+ * Submit handler for the boilerplate_admin_settings_form() form.
  */
-function boilerplate_admin_settings_submit($form, &$form_state) {
+function boilerplate_admin_settings_form_submit($form, &$form_state) {
   global $user;
 
   if ($form_state['values']['boilerplate_var_public_file'] > 0) {
