@@ -11,7 +11,7 @@
 /**
  * Sample batch init function.
  *
- * Load and then resave all content on the site
+ * Load and then resave all content on the site.
  */
 function boilerplate_batch_init() {
 
@@ -29,7 +29,7 @@ function boilerplate_batch_init() {
   $nodes = db_query("SELECT nid FROM {node}");
 
   foreach ($nodes as $node) {
-    $batch['operations'][] = array('boilerplate_batch_worker', array($node->nid)); 
+    $batch['operations'][] = array('boilerplate_batch_worker', array($node->nid));
   }
 
   batch_set($batch);

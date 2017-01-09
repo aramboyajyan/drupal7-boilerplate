@@ -12,7 +12,7 @@
  * Helper function - generate a random string.
  */
 function _boilerplate_generate_random_string($length = 32) {
-  $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';  
+  $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   $size  = strlen($chars);
   $str   = '';
   for ($i = 0; $i < $length; $i++) {
@@ -152,8 +152,8 @@ function _boilerplate_country($country) {
     require_once DRUPAL_ROOT . '/includes/locale.inc';
     $countries = country_get_list();
   }
-  
-  // Country abbreviations will always be two uppercase letters. 
+
+  // Country abbreviations will always be two uppercase letters.
   $country = drupal_strtoupper($country);
   if (!empty($country) && isset($countries[$country])) {
     return check_plain($countries[$country]);
@@ -249,7 +249,9 @@ function _boilerplate_get_user_picture_or_default($account, $preset) {
 function _boilerplate_get_aliased_arg($key = 0) {
   $items = explode('/', current_path());
 
-  if (isset($items[$key])) return $items[$key];
+  if (isset($items[$key])) {
+    return $items[$key];
+  }
 
   return FALSE;
 }

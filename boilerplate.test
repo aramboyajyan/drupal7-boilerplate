@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file 
+ * @file
  * Tests for boilerplate.module.
  *
  * Created by: Topsitemakers
@@ -22,7 +22,7 @@ class BoilerplateWebTestCase extends DrupalWebTestCase {
   /**
    * Set up the test case and enable all necessary modules for testing.
    */
-  function setUp() {
+  public function setUp() {
     parent::setUp('boilerplate');
   }
 
@@ -47,8 +47,7 @@ class BoilerplateSampleTestCase extends BoilerplateWebTestCase {
   /**
    * Sample test function.
    */
-  function testSample() {
-    // 
+  public function testSample() {
   }
 
 }

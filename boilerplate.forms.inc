@@ -29,7 +29,7 @@ function boilerplate_sample_form($form, &$form_state, $arg1, $arg2) {
   );
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Submit the form'));
-  
+
   return $form;
 }
 

@@ -15,9 +15,9 @@ function boilerplate_admin_settings_form() {
 
   // Note: to make things easier and less confusing, it is the best to name
   // variables using the following pattern:
-  // 
+  //
   //    [module_name]_var_[variable_title]
-  // 
+  //
   // This way it will be easy to tell what is a function and what is a variable
   // in certain cases (e.g. editor autocomplete). This can be a real sanity
   // saver in larger projects where there are many big custom modules, each with

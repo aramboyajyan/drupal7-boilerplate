@@ -20,7 +20,7 @@
  * @param $entity
  *   An entity object
  * @param string $entity
- *   An string containing entity type name
+ *   An string containing entity type name.
  * @param string $op
  *   An string containing the operating that's taking place (insert/update/delete)
  *
@@ -45,7 +45,7 @@ function hook_entity_postsave($entity, $entity_type, $op) {
  * @param $entity
  *   An entity object
  * @param string $entity
- *   An string containing entity type name
+ *   An string containing entity type name.
  *
  * @see hook_entity_postsave()
  * @see hook_entity_postupdate()
@@ -67,7 +67,7 @@ function hook_entity_postinsert($entity, $entity_type) {
  * @param $entity
  *   An entity object
  * @param string $entity
- *   An string containing entity type name
+ *   An string containing entity type name.
  *
  * @see hook_entity_postsave()
  * @see hook_entity_postinsert()
@@ -89,7 +89,7 @@ function hook_entity_postupdate($entity, $entity_type) {
  * @param $entity
  *   An entity object
  * @param string $entity
- *   An string containing entity type name
+ *   An string containing entity type name.
  *
  * @see hook_entity_postsave()
  * @see hook_entity_postinsert()

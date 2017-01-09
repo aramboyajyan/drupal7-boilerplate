@@ -10,7 +10,7 @@
 
 /**
  * Implements hook_rules_event_info().
- * 
+ *
  * @see boilerplate_sample_send_email()
  */
 function boilerplate_rules_event_info() {
@@ -36,17 +36,17 @@ function boilerplate_rules_event_info() {
 function boilerplate_rules_condition_info() {
   return array(
     'boilerplate_rules_condition_compare_nids' => array(
-      'label' => t('Sample condition'), 
+      'label' => t('Sample condition'),
       'parameter' => array(
         'node1' => array(
           'label' => t('First node parameter'),
           'type' => 'node',
-        ), 
+        ),
         'node2' => array(
           'label' => t('Second node parameter'),
           'type' => 'node',
-        ), 
-      ), 
+        ),
+      ),
       'group' => t('Custom'),
     ),
   );
@@ -63,7 +63,7 @@ function boilerplate_rules_action_info() {
       'parameter' => array(
         'account' => array(
           'type' => 'user',
-          'label' => t('User')
+          'label' => t('User'),
         ),
       ),
     ),
