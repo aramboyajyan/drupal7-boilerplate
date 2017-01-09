@@ -20,6 +20,17 @@ function boilerplate_drush_command() {
       'name' => dt('Optional. A name which will be greeted upon running the command.'),
     ),
     'aliases' => array('boilerplate-hi'),
+    'topics' => array('docs-boilerplate'),
+  );
+  // Commandfiles may also add topics.  These will appear in
+  // the list of topics when `drush topic` is executed.
+  $items['docs-boilerplate'] = array(
+    'description' => 'Info about boilerplate.',
+    'hidden' => TRUE,
+    'topic' => TRUE,
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
+    'callback' => 'drush_print_file',
+    'callback arguments' => array(dirname(__FILE__) . '/CHANGELOG.md'),
   );
 
   return $items;
