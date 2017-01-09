@@ -68,6 +68,16 @@ function boilerplate_admin_settings() {
     ),
     '#upload_location' => 'public://boilerplate-public-images/',
   );
+  $form['settings']['boilerplate_var_private_file'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Private file upload'),
+    '#description' => t('Demonstrates how to add a private file upload field.'),
+    '#default_value' => variable_get('boilerplate_var_private_file'),
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('png gif jpg jpeg'),
+    ),
+    '#upload_location' => 'private://boilerplate-private-images/',
+  );
   $form['settings']['boilerplate_var_textarea'] = array(
     '#type' => 'textarea',
     '#title' => t('Textarea field'),
@@ -101,5 +111,15 @@ function boilerplate_admin_settings_submit($form, &$form_state) {
     file_save($public_file);
     // Store the relationship to this file to the database.
     file_usage_add($public_file, 'boilerplate_public_file', 'user', $user->uid);
+  }
+
+  if ($form_state['values']['boilerplate_var_private_file'] > 0) {
+    // Change the status of uploaded file, because the system will delete it
+    // otherwise after 6 hours.
+    $private_file = file_load($form_state['values']['boilerplate_var_private_file']);
+    $private_file->status = FILE_STATUS_PERMANENT;
+    file_save($private_file);
+    // Store the relationship to this file to the database.
+    file_usage_add($private_file, 'boilerplate_private_file', 'user', $user->uid);
   }
 }
