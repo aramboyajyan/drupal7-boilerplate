@@ -53,6 +53,18 @@ function boilerplate_drush_help($section) {
 }
 
 /**
+ * Implements drush_hook_COMMAND_validate().
+ */
+function drush_boilerplate_hello_validate() {
+  $args = func_get_args();
+
+  if ($args[0] == 'me') {
+    $message = dt("You can't say hi to yourself");
+    return drush_set_error('NON_AVAILABLE', $message);
+  }
+}
+
+/**
  * Callback for the boilerplate-hello command.
  */
 function boilerplate_hello_command() {
