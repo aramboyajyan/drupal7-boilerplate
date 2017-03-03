@@ -263,3 +263,15 @@ function _boilerplate_clear_views_cache($view_name) {
   cache_clear_all('ctools_export:views_view:' . $view_name, 'cache_views', TRUE);
   cache_clear_all($view_name, 'cache_views_data', TRUE);
 }
+
+/**
+ * Helper function - get the label of a content type.
+ */
+function _boilerplate_get_content_type_label($content_type) {
+  $all_content_types = node_type_get_types();
+  if (isset($all_content_types[$content_type])) {
+    return $all_content_types[$content_type]->name;
+  }
+
+  return FALSE;
+}
