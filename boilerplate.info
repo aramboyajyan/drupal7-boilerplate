@@ -17,6 +17,7 @@ project = boilerplate
 ; Scripts
 ; ------------------------------------------------------------------------------
 scripts[] = js/ads.js
+scripts[] = js/boilerplate.commands.js
 scripts[] = js/boilerplate.js
 
 ; ------------------------------------------------------------------------------
