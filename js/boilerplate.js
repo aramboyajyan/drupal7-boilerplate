@@ -10,20 +10,22 @@
   Drupal.behaviors.boilerplateModule = {
     attach: function (context, settings) {
 
+      // Let's check if the user has AdBlock enabled.
+      $('body').once('adblock', function() {
+        if (window.AdBlockNotPresent !== undefined) {
+          console.log('You do not have AdBlock enabled.');
+        }
+        else {
+          console.log('You have AdBlock enabled.');
+        }
+      });
+
       // Sample action.
       /*
       $('#header', context).click(function () {
         console.log('Called from boilerplate.js');
       });
       */
-
-      // Let's check if the user has AdBlock enabled.
-      if (window.AdBlockNotPresent !== undefined) {
-        console.log('You do not have AdBlock enabled.');
-      }
-      else {
-        console.log('You have AdBlock enabled.');
-      }
 
     }
   };

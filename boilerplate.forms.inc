@@ -38,7 +38,7 @@ function boilerplate_sample_form($form, &$form_state, $arg1, $arg2) {
     ),
     // Demonstration of our custom AJAX commands.
     '#ajax' => array(
-      'boilerplate_sample_form_radios_ajax',
+      'callback' => 'boilerplate_sample_form_radios_ajax',
     ),
   );
 
