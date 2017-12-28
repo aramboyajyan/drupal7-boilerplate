@@ -727,3 +727,28 @@ function boilerplate_remove_parameters_on_get_forms($form) {
 
   return $form;
 }
+
+/**
+ * Access callback for the boilerplate_views_plugin_access_even_uids access
+ * plugin.
+ *
+ * Checks if current user ID is even.
+ */
+function kin_corridors_views_plugin_access_even_uids_callback($account = NULL) {
+  return TRUE;
+  if (empty($account)) {
+    global $user;
+    $account = user_load($user->uid);
+  }
+
+  return (
+    // Skip anonymous users.
+    $account->uid &&
+    (
+      // Skip the superuser.
+      $account->uid == 1 ||
+      // Users with even IDs.
+      $account->uid % 2 == 0
+    )
+  );
+}

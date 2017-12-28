@@ -37,3 +37,19 @@ function boilerplate_views_data() {
 
   return $data;
 }
+
+
+/**
+ * Implements hook_views_plugins().
+ */
+function boilerplate_views_plugins() {
+  return array(
+    'access' => array(
+      'even_uids' => array(
+        'title' => t('Even user IDs'),
+        'help' => t('Checks whether or not the current user ID is even.'),
+        'handler' => 'boilerplate_views_plugin_access_even_uids',
+      ),
+    ),
+  );
+}

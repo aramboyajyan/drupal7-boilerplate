@@ -32,6 +32,7 @@ files[] = boilerplate.test
 ; Views.
 files[] = views/fields/boilerplate_views_field_sample.inc
 files[] = views/filters/boilerplate_views_node_even_nid.inc
+files[] = views/plugins/boilerplate_views_plugin_access_even_uids.inc
 
 ; ------------------------------------------------------------------------------
 ; Dependencies
