@@ -12,31 +12,42 @@
  * Implements hook_token_info().
  */
 function boilerplate_token_info() {
-  // Real username, not formatted user's name.
-  $info['tokens']['user']['username'] = array(
-    'name' => t('Real username'),
-    'description' => t('Real username.'),
-  );
-  // Define our token type.
-  $types['boilerplate-test'] = array(
+  /**
+   * Define token type.
+   */
+  $types['boilerplate'] = array(
     'name' => t('Boilerplate'),
     'description' => t('Sample token created from a custom module.'),
   );
-  // Define specific tokens.
-  $tokens['time'] = array(
+
+  /**
+   * Provide custom tokens.
+   *
+   * The array key must match the type we defined above.
+   */
+  $tokens['boilerplate']['time'] = array(
     'name' => t('Time'),
     'description' => t('Shows the current time.'),
   );
-  $tokens['md5'] = array(
+  $tokens['boilerplate']['md5'] = array(
     'name' => t('MD5 Time'),
     'description' => t('Generates an MD5 hash of current time.'),
   );
 
+  /**
+   * Provide additional tokens for existing token types.
+   */
+  // Real username, not formatted user's name. This is important because the
+  // token provided by default will return formatted user's name, which can be
+  // changed using hook_username_alter().
+  $tokens['user']['username'] = array(
+    'name' => t('Real username'),
+    'description' => t('Real username.'),
+  );
+
   return array(
     'types' => $types,
-    'tokens' => array(
-      'boilerplate' => $tokens,
-    ),
+    'tokens' => $tokens,
   );
 }
 
