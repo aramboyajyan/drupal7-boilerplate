@@ -357,6 +357,23 @@ function boilerplate_preprocess_block(&$vars) {
  * Implements hook_form_alter().
  */
 function boilerplate_form_alter(&$form, &$form_state, $form_id) {
+  /**
+   * Remove unnecessary parameters for forms with GET method.
+   */
+  if ($form['#method'] == 'get') {
+    // Form related information needs to be removed through an after build
+    // callback.
+    $form['#after_build'][] = 'boilerplate_remove_parameters_on_get_forms';
+    // We also need to remove the button names.
+    //
+    // The code below is just an example that will work with simple forms.
+    // Modify it to suit your needs.
+    foreach (element_children($form) as $element) {
+      if (isset($form[$element]['#type']) && $form[$element]['#type'] == 'submit') {
+        $form[$element]['#name'] = '';
+      }
+    }
+  }
 
   /**
    * Specific overrides.
@@ -698,4 +715,15 @@ function _boilerplate_post_save($entity, $type, $op) {
       module_invoke_all('node_postsave', $entity, $op);
     }
   }
+}
+
+/**
+ * Remove unnecessary parameters from GET forms.
+ */
+function boilerplate_remove_parameters_on_get_forms($form) {
+  unset($form['form_token']);
+  unset($form['form_build_id']);
+  unset($form['form_id']);
+
+  return $form;
 }
