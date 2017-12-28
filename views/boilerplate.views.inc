@@ -24,5 +24,16 @@ function boilerplate_views_data() {
     ),
   );
 
+  /**
+   * Dynamic filters.
+   */
+  $data['node']['boilerplate_views_node_even_nid'] = array(
+    'title' => t('Even NID'),
+    'help' => t('Dynamic filter that filters only nodes that have an even node ID.'),
+    'filter' => array(
+      'handler' => 'boilerplate_views_node_even_nid',
+    ),
+  );
+
   return $data;
 }
