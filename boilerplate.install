@@ -166,4 +166,13 @@ function boilerplate_install() {
 function boilerplate_uninstall() {
   // Remove all our variables at once.
   db_query("DELETE FROM {variable} WHERE name LIKE :variables", array(':variables' => 'boilerplate_%'));
+  // Remove our date format from the system.
+  module_load_include('inc', 'boilerplate', 'boilerplate.date-formats');
+  db_delete('date_formats')
+    ->condition('format', FFF_MAIN_FORUM_TOPIC_DATE_FORMAT)
+    ->execute();
+  db_delete('date_format_type')
+    ->condition('title', t(FFF_MAIN_FORUM_TOPIC_DATE_LABEL))
+    ->execute();
+  variable_del('date_format_' . BOILERPLATE_DATE_FORMAT_SAMPLE);
 }
