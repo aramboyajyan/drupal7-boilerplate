@@ -28,7 +28,7 @@ function boilerplate_requirements($phase) {
       // Let's check if the name of this module is still "boilerplate".
       // If it is, that means that it was not customized and the developers
       // should consider renaming it.
-      $module_name = basename(__FILE__, '.module');
+      $module_name = basename(__FILE__, '.install');
       // A little trick that will prevent the string from being replaced. We'll
       // compare the module name to the base64 encoding of "boilerplate". If we
       // don't do this, the error will always be displayed because the string we
