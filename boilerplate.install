@@ -109,6 +109,40 @@ function boilerplate_schema() {
  * Implements hook_install().
  */
 function boilerplate_install() {
+  /**
+   * Add our custom date format.
+   */
+  module_load_include('inc', 'boilerplate', 'boilerplate.date-formats');
+  // Check if this is already added to the database or if a similar format
+  // exists.
+  $exists = db_select('date_formats', 'f')
+    ->fields('f', array('dfid'))
+    ->condition('format', BOILERPLATE_DATE_FORMAT_SAMPLE)
+    ->execute()
+    ->fetchCol();
+  if (!$exists) {
+    // Insert custom date format.
+    db_insert('date_formats')
+      ->fields(array(
+        'type' => 'custom',
+        'format' => BOILERPLATE_DATE_FORMAT_SAMPLE,
+        'locked' => 0,
+      ))
+      ->execute();
+    // Insert a new record to the type table.
+    db_insert('date_format_type')
+      ->fields(array(
+        'type' => BOILERPLATE_DATE_TYPE_SAMPLE,
+        'title' => t(BOILERPLATE_DATE_LABEL_SAMPLE),
+        'locked' => 0,
+      ))
+      ->execute();
+    // Connect the two.
+    variable_set('date_format_' . BOILERPLATE_DATE_FORMAT_SAMPLE, BOILERPLATE_DATE_FORMAT_SAMPLE);
+  }
+  else {
+    watchdog('boilerplate_date_formats', 'Another date format with the same name already exists in the system.', array(), WATCHDOG_NOTICE);
+  }
 
   /*
   // Update the system weight and place it after a certain module.
