@@ -29,6 +29,8 @@ stylesheets[all][] = css/boilerplate.css
 ; Module files
 ; ------------------------------------------------------------------------------
 files[] = boilerplate.test
+; Views.
+files[] = views/fields/boilerplate_views_field_sample.inc
 
 ; ------------------------------------------------------------------------------
 ; Dependencies
