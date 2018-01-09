@@ -204,7 +204,7 @@ function _boilerplate_check_if_user_exists($identifier) {
   $query = db_select('users', 'u')
     ->fields('u', array('uid'));
 
-  $identifier = drupal_strtolower($identifier);
+  $identifier = drupal_strtolower(trim($identifier));
   if (valid_email_address($identifier)) {
     $query->condition('mail', $identifier);
   }
