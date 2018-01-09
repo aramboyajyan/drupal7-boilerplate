@@ -146,7 +146,7 @@ function _boilerplate_get_all_vocabularies() {
 /**
  * Helper function - get the name of the country given the abbreviation.
  */
-function _boilerplate_country($country) {
+function _boilerplate_get_country_name_by_abbreviation($country) {
   $countries = &drupal_static(__FUNCTION__);
   if (empty($countries)) {
     require_once DRUPAL_ROOT . '/includes/locale.inc';
