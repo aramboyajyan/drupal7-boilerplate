@@ -606,8 +606,8 @@ function boilerplate_skinr_api_2() {
  * Implements hook_mail_alter.
  */
 function boilerplate_mail_alter(&$message) {
+  // Check if all emails should be disabled.
   if (BOILERPLATE_DISABLE_EMAILS) {
-    // Set 'To' field to nothing, so Drupal won't have any address.
     $message['to'] = '';
   }
 }
