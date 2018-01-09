@@ -309,3 +309,18 @@ function _boilerplate_join_items_with_comma_and_and($raw_items) {
 
   return $formatted_items;
 }
+
+/**
+ * Helper function - get node title.
+ */
+function _boilerplate_get_node_title($nid) {
+  static $results;
+
+  if (isset($results[$nid]) && !empty($results[$nid])) {
+    return $results[$nid];
+  }
+
+  $results[$nid] = db_query("SELECT title FROM {node} WHERE nid = :nid", array(':nid' => $nid))->fetchField();
+
+  return $results[$nid];
+}
