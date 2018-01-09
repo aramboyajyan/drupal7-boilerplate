@@ -485,7 +485,7 @@ function boilerplate_page_alter(&$page) {
   // admin theme used on the site, but this might be an overkill in cases when
   // only minor modifications are needed.
   if (path_is_admin(current_path())) {
-    drupal_add_css(drupal_get_path('module', 'boilerplate') . '/css/admin.modifications.css');
+    drupal_add_css(drupal_get_path('module', 'boilerplate') . '/css/boilerplate.admin.modifications.css');
   }
 
   // Add custom setting accessible in JS through Drupal.settings.boilerplate.var.
