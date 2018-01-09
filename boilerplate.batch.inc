@@ -26,10 +26,13 @@ function boilerplate_batch_init() {
     'file' => drupal_get_path('module', 'boilerplate') . '/boilerplate.batch.inc',
   );
 
-  $nodes = db_query("SELECT nid FROM {node}");
-
-  foreach ($nodes as $node) {
-    $batch['operations'][] = array('boilerplate_batch_worker', array($node->nid));
+  $nids = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->orderBy('n.nid', 'ASC')
+    ->execute()
+    ->fetchCol();
+  foreach ($nids as $nid) {
+    $batch['operations'][] = array('boilerplate_batch_worker', array($nid));
   }
 
   batch_set($batch);
