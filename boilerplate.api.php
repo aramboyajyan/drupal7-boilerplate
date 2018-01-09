@@ -31,7 +31,7 @@
  */
 function hook_entity_postsave($entity, $entity_type, $op) {
   list($id) = entity_extract_ids($entity_type, $entity);
-  watchdog('boilerplate_test', 'The @operation entity @entity_type id is @id from @function.', array(
+  watchdog('boilerplate_api_example', 'The @operation entity @entity_type id is @id from @function.', array(
     '@id' => $id,
     '@function' => __FUNCTION__,
     '@operation' => t($operation . 'd'),
@@ -54,7 +54,7 @@ function hook_entity_postsave($entity, $entity_type, $op) {
  */
 function hook_entity_postinsert($entity, $entity_type) {
   list($id) = entity_extract_ids($entity_type, $entity);
-  watchdog('boilerplate_test', 'The inserted entity @entity_type id is @id from @function.', array(
+  watchdog('boilerplate_api_example', 'The inserted entity @entity_type id is @id from @function.', array(
     '@id' => $id,
     '@function' => __FUNCTION__,
     '@entity_type' => $entity_type,
@@ -76,7 +76,7 @@ function hook_entity_postinsert($entity, $entity_type) {
  */
 function hook_entity_postupdate($entity, $entity_type) {
   list($id) = entity_extract_ids($entity_type, $entity);
-  watchdog('boilerplate_test', 'The updated entity @entity_type id is @id from @function.', array(
+  watchdog('boilerplate_api_example', 'The updated entity @entity_type id is @id from @function.', array(
     '@id' => $id,
     '@function' => __FUNCTION__,
     '@entity_type' => $entity_type,
@@ -98,7 +98,7 @@ function hook_entity_postupdate($entity, $entity_type) {
  */
 function hook_entity_postdelete($entity, $entity_type) {
   list($id) = entity_extract_ids($entity_type, $entity);
-  watchdog('boilerplate_test', 'The deleted entity @entity_type id is @id from @function.', array(
+  watchdog('boilerplate_api_example', 'The deleted entity @entity_type id is @id from @function.', array(
     '@id' => $id,
     '@function' => __FUNCTION__,
     '@entity_type' => $entity_type,
@@ -119,7 +119,7 @@ function hook_entity_postdelete($entity, $entity_type) {
  * @ingroup node_api_hooks
  */
 function hook_node_postsave($node, $op) {
-  watchdog('boilerplate_test', 'The @operation node @node_type id is @nid from @function.', array(
+  watchdog('boilerplate_api_example', 'The @operation node @node_type id is @nid from @function.', array(
     '@nid' => $node->nid,
     '@function' => __FUNCTION__,
     '@node_type' => $node->type,
@@ -139,7 +139,7 @@ function hook_node_postsave($node, $op) {
  * @ingroup node_api_hooks
  */
 function hook_node_postinsert($node) {
-  watchdog('boilerplate_test', 'The inserted node @node_type id is @nid from @function.', array(
+  watchdog('boilerplate_api_example', 'The inserted node @node_type id is @nid from @function.', array(
     '@nid' => $node->nid,
     '@function' => __FUNCTION__,
     '@node_type' => $node->type,
@@ -158,7 +158,7 @@ function hook_node_postinsert($node) {
  * @ingroup node_api_hooks
  */
 function hook_node_postupdate($node) {
-  watchdog('boilerplate_test', 'The updated node @node_type id is @nid from @function.', array(
+  watchdog('boilerplate_api_example', 'The updated node @node_type id is @nid from @function.', array(
     '@nid' => $node->nid,
     '@function' => __FUNCTION__,
     '@node_type' => $node->type,
@@ -177,7 +177,7 @@ function hook_node_postupdate($node) {
  * @ingroup node_api_hooks
  */
 function hook_node_postdelete($node) {
-  watchdog('boilerplate_test', 'The deleted node @node_type id is @nid from @function.', array(
+  watchdog('boilerplate_api_example', 'The deleted node @node_type id is @nid from @function.', array(
     '@nid' => $node->nid,
     '@function' => __FUNCTION__,
     '@node_type' => $node->type,
