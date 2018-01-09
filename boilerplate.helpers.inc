@@ -275,3 +275,37 @@ function _boilerplate_get_content_type_label($content_type) {
 
   return FALSE;
 }
+
+/**
+ * Helper function - join items with a comma and "and" at the end.
+ */
+function _boilerplate_join_items_with_comma_and_and($raw_items) {
+  $items = array_values($raw_items);
+  $number_of_items = count($items);
+
+  switch ($number_of_items) {
+    case 0:
+      $formatted_items = NULL;
+      break;
+
+    case 1:
+      $formatted_items = array_shift(array_values($items));
+      break;
+
+    case 2:
+      $formatted_items = t('@item1 and @item2', array(
+        '@item1' => $items[0],
+        '@item2' => $items[1],
+      ));
+      break;
+
+    default:
+      $formatted_items = t('@comma_separated_items and @last_item', array(
+        '@comma_separated_items' => implode(', ', array_slice($items, 0, count($items) - 1)),
+        '@last_item' => end($items),
+      ));
+      break;
+  }
+
+  return $formatted_items;
+}
