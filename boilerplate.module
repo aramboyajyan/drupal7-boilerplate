@@ -473,6 +473,12 @@ function boilerplate_theme($existing, $type, $theme, $path) {
 function boilerplate_page_alter(&$page) {
   global $language;
 
+  // It is necessary to include Drupal's AJAX framework in order to use our
+  // custom AJAX commands. If they are used only in form context, this should be
+  // removed because Drupal will automatically include the AJAX library when
+  // an element has '#ajax' property.
+  drupal_add_library('system', 'drupal.ajax');
+
   // Add our custom CSS only on admin paths.
   //
   // Ideally, each website will have a child theme that is based on the contrib
